@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "name": "Juan",
+    "lastName": "Pedro",
+    "email": "juanpedro@gmail.com",
+    "password": "juanpedro10",
+    "role": "admin",
+    "task": ""
+  },
+  {
+    "id": "2",
+    "name": "Jorge",
+    "lastName": "Pablo",
+    "email": "jorgepablo@gmail.com",
+    "password": "jorgepablo10",
+    "role": "super-admin",
+    "task": ""
+  },
+  {
+    "id": "3",
+    "name": "Victor",
+    "lastName": "Hugo",
+    "email": "victorhugo@gmail.com",
+    "password": "victorhugo10",
+    "role": "employee",
+    "task": ""
+  },
+  {
+    "id": "4",
+    "name": "Agustin",
+    "lastName": "Perez",
+    "email": "agusperez@gmail.com",
+    "password": "agusperez10",
+    "role": "admin",
+    "task": ""
+  }
+]

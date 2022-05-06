@@ -5,14 +5,15 @@ import express from 'express';
 const admins = require('./data/admins.json');
 
 const app = express();
-const port = process.env.PORT || 3000;
-
 app.use(express.json());
+const port = process.env.PORT || 3000;
 
 app.get('/', async (req, res) => {
   res.send('Hello World!');
 });
+const employeeRouter = require('./resources/employees');
 
+app.use('/employees', employeeRouter);
 app.get('/admins', (req, res) => {
   res.status(200).json({
     data: admins,
