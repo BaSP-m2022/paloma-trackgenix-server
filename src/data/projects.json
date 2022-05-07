@@ -7,7 +7,8 @@
         "startDate": "11-20-2021",
         "finishDate": "01-10-2022",
         "rate": "20",
-        "projectManagerID": "1"
+        "projectManagerID": "1",
+        "state": "finished"
     },
 
     {
@@ -18,7 +19,8 @@
         "startDate": "02-12-2022",
         "finishDate": "03-31-2022",
         "rate": "26",
-        "projectManagerID": "6"
+        "projectManagerID": "6",
+        "state": "finished"
     },
 
     {
@@ -27,8 +29,9 @@
         "totalHours": "150",
         "projectDescription": "lorem",
         "startDate": "05-01-2022",
-        "finishDate": "",
+        "finishDate": "in progress",
         "rate": "30.4",
-        "projectManagerID": "4"
+        "projectManagerID": "4",
+        "state": "in progress"
     }
 ]

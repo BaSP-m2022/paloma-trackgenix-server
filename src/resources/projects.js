@@ -89,4 +89,14 @@ router.get('/getByProjectManagerId/:projectManagerID', (req, res) => {
   }
 });
 
+router.get('/getByState/:state', (req, res) => {
+  const stateProject = req.params.state;
+  const projectState = projects.filter((project) => project.state === stateProject);
+  if (projectState.length > 0) {
+    res.send(projectState);
+  } else {
+    res.send(`There is no projects with the "${stateProject}" state`);
+  }
+});
+
 module.exports = router;
