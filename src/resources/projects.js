@@ -40,22 +40,12 @@ router.get('/getByHours/:totalHours', (req, res) => {
 });
 
 router.get('/getByDescription/:projectDescription', (req, res) => {
-  const descriptionProject = req.params.projectDescription;
-  const projectDescribed = projects.filter((project) => project.projectDescription === descriptionProject);
+  const descProject = req.params.projectDescription;
+  const projectDescribed = projects.filter((project) => project.projectDescription === descProject);
   if (projectDescribed.length > 0) {
     res.send(projectDescribed);
   } else {
-    res.send(`There is no project with "${descriptionProject}" description`);
-  }
-});
-
-router.get('/getByDescription/:projectDescription', (req, res) => {
-  const descriptionProject = req.params.projectDescription;
-  const projectDescribed = projects.filter((project) => project.projectDescription === descriptionProject);
-  if (projectDescribed.length > 0) {
-    res.send(projectDescribed);
-  } else {
-    res.send(`There is no project with "${descriptionProject}" description`);
+    res.send(`There is no project with "${descProject}" description`);
   }
 });
 
@@ -90,12 +80,12 @@ router.get('/getByRate/:rate', (req, res) => {
 });
 
 router.get('/getByProjectManagerId/:projectManagerID', (req, res) => {
-  const managerIdProject = req.params.projectManagerID;
-  const projectManager = projects.filter((project) => project.projectManagerID === managerIdProject);
+  const managerIdP = req.params.projectManagerID;
+  const projectManager = projects.filter((project) => project.projectManagerID === managerIdP);
   if (projectManager.length > 0) {
     res.send(projectManager);
   } else {
-    res.send(`There is no projects with a manager with the ID number "${managerIdProject}"`);
+    res.send(`There is no projects with a manager with the ID number "${managerIdP}"`);
   }
 });
 
