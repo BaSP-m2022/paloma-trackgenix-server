@@ -54,5 +54,19 @@
         "rate": "230",
         "project": "BaSP2",
         "task": "data base"
+    },
+    {
+        "employeeID": "5",
+        "id": "5",
+        "name": "Juan",
+        "surname": "Sanchez",
+        "role": "Employee",
+        "start date": "22/11/2022",
+        "finish date": "24/11/2022",
+        "regular hours": "30",
+        "overtime hours": "10",
+        "rate": "300",
+        "project": "BaSP2",
+        "task": "data base"
     }
 ]
