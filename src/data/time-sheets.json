@@ -1,0 +1,58 @@
+[
+    {
+        "employeeID": "1",
+        "id": "1",
+        "name": "Lautaro",
+        "surname": "Caballero",
+        "role": "superadmin",
+        "start date": "22/11/2022",
+        "finish date": "24/11/2022",
+        "regular hours": "12",
+        "overtime hours": "4",
+        "rate": "500",
+        "project": "BaSP2",
+        "task": "data base"
+    },
+    {
+        "employeeID": "2",
+        "id": "2",
+        "name": "Javier",
+        "surname": "Sanchez",
+        "role": "admin",
+        "start date": "22/11/2022",
+        "finish date": "24/11/2022",
+        "regular hours": "12",
+        "overtime hours": "4",
+        "rate": "400",
+        "project": "BaSP3",
+        "task": "administration"
+    },
+    {
+        "employeeID": "3",
+        "id": "3",
+        "name": "Agustin",
+        "surname": "Perez",
+        "role": "Employee",
+        "start date": "22/11/2022",
+        "finish date": "24/11/2022",
+        "regular hours": "12",
+        "overtime hours": "4",
+        "rate": "110",
+        "project": "BaSP2",
+        "task": "data base"
+    },
+    {
+        "employeeID": "4",
+        "id": "4",
+        "name": "Roberto",
+        "surname": "Carlos",
+        "role": "Employee",
+        "start date": "22/11/2022",
+        "finish date": "24/11/2022",
+        "regular hours": "24",
+        "overtime hours": "6",
+        "rate": "230",
+        "project": "BaSP2",
+        "task": "data base"
+    }
+]
