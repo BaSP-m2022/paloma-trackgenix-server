@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const tasks = require('../data/tasks.json');
 
 const router = express.Router();
@@ -55,6 +56,18 @@ router.get('/getByEmployeeID/:employeeID', (req, res) => {
   } else {
     res.send(`There is no employee with ID number "${emplId}"`);
   }
+});
+
+router.post('/add', (req, res) => {
+  const taskData = req.body;
+  tasks.push(taskData);
+  fs.writeFile('src/data/tasks.json', JSON.stringify(tasks), (err) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send('Task created');
+    }
+  });
 });
 
 module.exports = router;
