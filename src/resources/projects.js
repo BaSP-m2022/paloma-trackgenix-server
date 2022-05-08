@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const projects = require('../data/projects.json');
 
 const router = express.Router();
@@ -17,7 +18,21 @@ router.get('/getById/:projectID', (req, res) => {
   }
 });
 
-// router.delete('/')
+router.delete('/delete/:projectID', (req, res) => {
+  const projectId = req.params.projectID;
+  const filteredProject = projects.filter((project) => project.projectID !== projectId);
+  if (projects.length === filteredProject.length) {
+    res.send('Could not delete the project because it was not found');
+  } else {
+    fs.writeFile('src/data/projects.json', JSON.stringify(filteredProject), (err) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send('User deleted');
+      }
+    });
+  }
+});
 
 router.get('/getByName/:projectName', (req, res) => {
   const nameProject = req.params.projectName;
