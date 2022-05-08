@@ -1,4 +1,5 @@
 const express = require('express');
+const res = require('express/lib/response');
 const fs = require('fs');
 const timesheets = require('../data/time-sheets.json');
 
@@ -62,6 +63,28 @@ router.post('/Add', (req, res) => {
       res.send('Timesheet added');
     }
   });
+});
+
+router.delete('/delete/:id', (req, res) => {
+  const timesheetID = req.params.id;
+  const filteredID = timesheets.filter(
+    (ts) => ts.id !== timesheetID,
+  );
+  if (timesheets.length === filteredID.length) {
+    res.send(`Timsheet ${timesheetID} not found`);
+  } else {
+    fs.writeFile(
+      'src/data/time-sheets.json',
+      JSON.stringify(filteredID),
+      (err) => {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send('timesheet deleted');
+        }
+      },
+    );
+  }
 });
 
 module.exports = router;
