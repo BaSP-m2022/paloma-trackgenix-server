@@ -8,5 +8,15 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "eslint.format.enable": true,
+"eslint.format.enable": true,
+"cSpell.ignoreWords": [
+    "Abelwhite",
+    "Bemment",
+    "Quincey"
+],
+"cSpell.words": [
+    "exrpess",
+    "Miguet",
+    "Rumbelow"
+],
 }
