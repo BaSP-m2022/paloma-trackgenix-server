@@ -52,8 +52,8 @@ router.delete('/delete/:id', (req, res) => {
 });
 
 router.post('/add', (req, res) => {
-  const userData = req.body;
-  employees.push(userData);
+  const employeeData = req.body;
+  employees.push(employeeData);
   fs.writeFile(
     'src/data/employees.json',
     JSON.stringify(employees),
@@ -69,14 +69,23 @@ router.post('/add', (req, res) => {
   res.send('OKa');
 });
 
-// const fileName = './file.json';
-// const employee = require(employees);
-
-// employees.key = 'new value';
-
-// fs.writeFile(employees, JSON.stringify(employee), (err) => {
-//   if (err) return console.log(err);
-//   console.log(JSON.stringify(employee));
-//   console.log(`writing to ${employees}`);
-// });
+router.put('/edit/:id', (req, res) => {
+  let userID = req.params.id;
+  const jsonData = fs.readFileSync('src/data/employees.json');
+  const data = JSON.parse(jsonData);
+  const filterID = employees.find((employee) => employee.id === userID);
+  if (filterID) {
+    userID -= 1;
+    data[userID].name = req.body.name;
+    data[userID].lastName = req.body.lastName;
+    data[userID].email = req.body.email;
+    data[userID].password = req.body.password;
+    data[userID].role = req.body.role;
+    data[userID].task = req.body.task;
+    fs.writeFileSync('src/data/employees.json', JSON.stringify(data));
+    res.json(data);
+  } else {
+    res.send('User not found');
+  }
+});
 module.exports = router;
