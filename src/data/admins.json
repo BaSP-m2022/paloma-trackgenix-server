@@ -40,14 +40,6 @@
         "status": "true"
     },
     {
-        "id": "5",
-        "name": "Elsa",
-        "lastName": "Pallo",
-        "email": "epallo0@gmail.com",
-        "gender": "Female",
-        "status": "true"
-    },
-    {
         "id": "6",
         "name": "Rogelio",
         "lastName": "Garrote",
