@@ -9,6 +9,7 @@ const adminsRouter = require('./resources/administrator');
 const app = express();
 const port = process.env.PORT || 3000;
 
+// With this line and the body parser the server can obtain info from postman
 app.use(express.json());
 
 app.use('/administrator', adminsRouter);
