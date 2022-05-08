@@ -29,14 +29,25 @@ router.get('/getByRole/:role', (req, res) => {
     res.send(`There are no ${userRole} users`);
   }
 });
-router.get('/getByRole/:role', (req, res) => {
-  const userRol = req.params.role;
-  const user = employees.find((employee) => employee.role === userRol);
-
-  if (user) {
-    res.send(user);
+router.delete('/delete/:id', (req, res) => {
+  const employeeId = req.params.id;
+  const filteredEmp = employees.filter(
+    (employee) => employee.id !== employeeId
+  );
+  if (employees.length === filteredEmp.length) {
+    res.send('Could not delete employee because it was not found');
   } else {
-    res.send('User not found');
+    fs.writeFile(
+      'src/data/employees.json',
+      JSON.stringify(filteredEmp),
+      (err) => {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send('Employee deleted');
+        }
+      }
+    );
   }
 });
 
@@ -57,4 +68,15 @@ router.post('/add', (req, res) => {
 
   res.send('OKa');
 });
+
+// const fileName = './file.json';
+// const employee = require(employees);
+
+// employees.key = 'new value';
+
+// fs.writeFile(employees, JSON.stringify(employee), (err) => {
+//   if (err) return console.log(err);
+//   console.log(JSON.stringify(employee));
+//   console.log(`writing to ${employees}`);
+// });
 module.exports = router;

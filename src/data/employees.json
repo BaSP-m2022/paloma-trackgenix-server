@@ -25,14 +25,5 @@
     "password": "victorhugo10",
     "role": "employee",
     "task": ""
-  },
-  {
-    "id": "4",
-    "name": "Agustin",
-    "lastName": "Perez",
-    "email": "agusperez@gmail.com",
-    "password": "agusperez10",
-    "role": "admin",
-    "task": ""
   }
 ]
