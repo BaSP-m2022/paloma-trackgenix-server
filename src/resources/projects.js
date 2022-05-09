@@ -94,13 +94,23 @@ router.get('/getByRate/:rate', (req, res) => {
   }
 });
 
-router.get('/getByProjectManagerId/:projectManagerID', (req, res) => {
-  const managerIdP = req.params.projectManagerID;
-  const projectManager = projects.filter((project) => project.projectManagerID === managerIdP);
-  if (projectManager.length > 0) {
-    res.send(projectManager);
+router.get('/getByEmployeeId/:employeeID', (req, res) => {
+  const employeeIdP = req.params.employeeID;
+  const projectEmployee = projects.filter((project) => project.employeeID === employeeIdP);
+  if (projectEmployee.length > 0) {
+    res.send(projectEmployee);
   } else {
-    res.send(`There is no projects with a manager with the ID number "${managerIdP}"`);
+    res.send(`There is no projects with a Employee with the ID number "${employeeIdP}"`);
+  }
+});
+
+router.get('/getByRole/:role', (req, res) => {
+  const roleProject = req.params.role;
+  const projectRole = projects.filter((project) => project.role === roleProject);
+  if (projectRole.length > 0) {
+    res.send(projectRole);
+  } else {
+    res.send(`There is no projects with the "${roleProject}" state`);
   }
 });
 
