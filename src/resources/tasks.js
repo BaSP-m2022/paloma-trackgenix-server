@@ -60,8 +60,9 @@ router.get('/getByEmployeeID/:employeeID', (req, res) => {
 
 router.post('/add', (req, res) => {
   const taskData = req.body;
+  const taskFound = tasks.find((task) => task.taskID === taskData.taskID);
   if (taskData.taskID && taskData.taskName && taskData.taskDescription
-    && taskData.status && taskData.employeeID) {
+    && taskData.status && taskData.employeeID && !taskFound) {
     tasks.push(taskData);
     fs.writeFile('src/data/tasks.json', JSON.stringify(tasks), (err) => {
       if (err) {
@@ -71,7 +72,7 @@ router.post('/add', (req, res) => {
       }
     });
   } else {
-    res.send('All fields must be completed');
+    res.send('Fields are not properly complete');
   }
 });
 
