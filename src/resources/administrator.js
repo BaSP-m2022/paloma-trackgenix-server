@@ -43,19 +43,21 @@ router.get('/getByStatus/:status', (req, res) => {
 // Creation of a new admin.
 router.post('/add', (req, res) => {
   const adminData = req.body;
-  /* // Validation in process, will be completed after finishing the exercise
-   if (!adminData.id || !adminData.name || !adminData.lastName
-    || !adminData.email || !adminData.gender || !adminData.status) {
-    res.send('Admin successfully deleted');('All the fields must be completed');
-  } */
-  administrators.push(adminData);
-  fs.writeFile('src/data/admins.json', JSON.stringify(administrators), (err) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send('User created');
-    }
-  });
+  const adminFound = administrators.find((eachAdm) => eachAdm.id === adminData.id);
+  // Validation in process, will be completed after finishing the exercise
+  if (adminData.id && adminData.name && adminData.lastName
+    && adminData.email && adminData.gender && adminData.status && !adminFound) {
+    administrators.push(adminData);
+    fs.writeFile('src/data/admins.json', JSON.stringify(administrators), (err) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send('User created');
+      }
+    });
+  } else {
+    res.send('All fields must be completed or the id already is taken');
+  }
 });
 // Delete of an existing admin.
 router.delete('/delete/:id', (req, res) => {

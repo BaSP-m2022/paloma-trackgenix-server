@@ -34,7 +34,7 @@
     {
         "id": "5",
         "name": "Elsa",
-        "lastName": "Pallo",
+        "lastName": "Pote",
         "email": "epallo0@gmail.com",
         "gender": "Female",
         "status": "true"
@@ -46,5 +46,13 @@
         "email": "rgarrote@outlook.com",
         "gender": "Female",
         "status": "true"
+    },
+    {
+        "id": "7",
+        "name": "Armando",
+        "lastName": "Paredes",
+        "email": "aparedes0@gmail.com",
+        "gender": "Male",
+        "status": "false"
     }
 ]
