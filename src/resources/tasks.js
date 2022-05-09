@@ -60,14 +60,19 @@ router.get('/getByEmployeeID/:employeeID', (req, res) => {
 
 router.post('/add', (req, res) => {
   const taskData = req.body;
-  tasks.push(taskData);
-  fs.writeFile('src/data/tasks.json', JSON.stringify(tasks), (err) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send('Task created');
-    }
-  });
+  if (taskData.taskID && taskData.taskName && taskData.taskDescription
+    && taskData.status && taskData.employeeID) {
+    tasks.push(taskData);
+    fs.writeFile('src/data/tasks.json', JSON.stringify(tasks), (err) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send('Task created');
+      }
+    });
+  } else {
+    res.send('All fields must be completed');
+  }
 });
 
 router.delete('/delete/:taskID', (req, res) => {
@@ -85,4 +90,23 @@ router.delete('/delete/:taskID', (req, res) => {
     });
   }
 });
+
+router.put('/edit/:taskID', (req, res) => {
+  let tasksId = req.params.taskID;
+  const jsonData = fs.readFileSync('src/data/tasks.json');
+  const data = JSON.parse(jsonData);
+  const filterTasks = tasks.find((task) => task.taskID === tasksId);
+  if (filterTasks) {
+    tasksId -= 1;
+    data[tasksId].taskName = req.body.taskName;
+    data[tasksId].taskDescription = req.body.taskDescription;
+    data[tasksId].status = req.body.status;
+    data[tasksId].employeeID = req.body.employeeID;
+    fs.writeFileSync('src/data/tasks.json', JSON.stringify(data));
+    res.json(data);
+  } else {
+    res.send('Task not found');
+  }
+});
+
 module.exports = router;
