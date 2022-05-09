@@ -4,9 +4,9 @@
         "name": "Juan",
         "lastName": "Pedro",
         "email": "juanpedro@gmail.com",
-        "password": "juanpedro10",
-        "role": "admin",
-        "assignedTask": ""
+        "password": "abc123",
+        "role": "superadmin",
+        "task": ""
     },
     {
         "id": "2",
@@ -15,7 +15,7 @@
         "email": "jorgepablo@gmail.com",
         "password": "jorgepablo10",
         "role": "superadmin",
-        "assignedTask": ""
+        "task": ""
     },
     {
         "id": "3",
@@ -24,6 +24,15 @@
         "email": "victorhugo@gmail.com",
         "password": "victorhugo10",
         "role": "employee",
-        "assignedTask": ""
+        "task": ""
+    },
+    {
+        "id": "4",
+        "name": "Ada",
+        "lastName": "Lovelace",
+        "email": "adalove@gmail.com",
+        "password": "asdf1234",
+        "role": "admin",
+        "task": ""
     }
 ]
