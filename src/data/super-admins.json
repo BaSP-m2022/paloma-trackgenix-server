@@ -22,10 +22,10 @@
     },
     {
         "ID": 4,
-        "Name": "Jaimie",
-        "LastName": "Illidge",
-        "email": "jillidge3@lycos.com",
-        "Password": "ivkA1mqWURW"
+        "Name": "admin",
+        "LastName": "lastname",
+        "email": "admin@admin.com",
+        "Password": "admin123456"
     },
     {
         "ID": 5,

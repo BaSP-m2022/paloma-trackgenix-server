@@ -28,7 +28,6 @@ router.post('/newSuperAdmin', (req, res) => {
     email: req.body.email,
     Password: req.body.Password,
   };
-  // console.log(path.resolve(__dirname))
   const file = fs.readFileSync(path.resolve(__dirname, '../data/super-admins.json'));
   // fs allows me to edit the file, readFileSync allows me to read it,
   // and path.resolve helps the program to find the file
@@ -60,5 +59,26 @@ router.delete('/delete-superAdmin/:superAdminID', (req, res) => {
     res.send('Could not delete the super admin because it was not found');
   }
 });
+// Edit superAdmin
+
+router.put('/edit/:id', (req, res) => {
+  let userID = parseInt(req.params.id, 10);
+  const jsonData = fs.readFileSync(path.resolve(__dirname, '../data/super-admins.json'));
+  const data = JSON.parse(jsonData);
+  const filterID = superAdmin.find((sa) => sa.ID === userID);
+  if (filterID) {
+    userID -= 1;
+    data[userID].Name = req.body.Name;
+    data[userID].LastName = req.body.LastName;
+    data[userID].email = req.body.email;
+    data[userID].Password = req.body.Password;
+    fs.writeFileSync(path.resolve(__dirname, '../data/super-admins.json'), JSON.stringify(data));
+    // The path.resolve finds the json file
+    res.json(data);
+  } else {
+    res.send('User not found');
+  }
+});
+
 module.exports = router;
 // exports the router const with express and methods
