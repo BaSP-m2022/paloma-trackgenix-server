@@ -7,43 +7,69 @@ const router = express.Router();
 router.get('/getAll', (req, res) => {
   res.send(employees);
 });
-
 router.get('/getById/:id', (req, res) => {
-  const employeeId = req.params.id;
-  const emp = employees.find((employee) => employee.id === employeeId);
-  if (emp) {
-    res.send(emp);
+  const userID = req.params.id;
+  const user = employees.find((employee) => employee.id === userID);
+
+  if (user) {
+    res.send(user);
   } else {
-    res.send(`Employee ${employeeId} not found`);
+    res.send('User not found');
   }
 });
 
-router.get('/getByRole', (req, res) => {
-  const employeeRole = req.query.role;
-  const filteredEmp = employees.filter((employee) => employee.role === employeeRole);
-  if (filteredEmp) {
-    res.send(filteredEmp);
+router.get('/getByRole/:role', (req, res) => {
+  const userRole = req.params.role;
+  const filteredUsers = employees.filter(
+    (employee) => employee.role === userRole,
+  );
+  if (filteredUsers.length > 0) {
+    res.send(filteredUsers);
   } else {
-    res.send(`There are no ${employeeRole} role`);
+    res.send(`There are no ${userRole} users`);
+  }
+});
+router.delete('/delete/:id', (req, res) => {
+  const employeeId = req.params.id;
+  const filteredEmp = employees.filter(
+    (employee) => employee.id !== employeeId,
+  );
+  if (employees.length === filteredEmp.length) {
+    res.send('Could not delete employee because it was not found');
+  } else {
+    fs.writeFile(
+      'src/data/employees.json',
+      JSON.stringify(filteredEmp),
+      (err) => {
+        if (err) {
+          res.send(err);
+        } else {
+          res.send('Employee deleted');
+        }
+      },
+    );
   }
 });
 
 router.post('/add', (req, res) => {
   const employeeData = req.body;
-  const emp = employees.find((employee) => employee.id === employeeData.id);
-  if (employeeData.id && employeeData.name && employeeData.lastName && employeeData.email
-    && employeeData.password && employeeData.role && !emp) {
+  const user = employees.find((employee) => employee.id === employeeData.id);
+  if (employeeData.id && employeeData.name && employeeData.lastName
+     && employeeData.email && employeeData.password && employeeData.role
+     && employeeData.role && employeeData.task && !user) {
     employees.push(employeeData);
-    fs.writeFile('src/data/employees.json', JSON.stringify(employees), (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send('Employee created');
-      }
-    });
-  } else {
-    res.send('All fields must be completed and the id must be unique');
-  }
+    fs.writeFile(
+      'src/data/employees.json',
+      JSON.stringify(employees),
+      (error) => {
+        if (error) {
+          res.send(error);
+        } else {
+          res.send('User registered');
+        }
+      },
+    );
+  } else { res.send('Must have all fields completed and the id must be unique'); }
 });
 
 router.put('/edit/:id', (req, res) => {
@@ -65,21 +91,4 @@ router.put('/edit/:id', (req, res) => {
     res.send('User not found');
   }
 });
-
-router.delete('/delete/:id', (req, res) => {
-  const employeeId = req.params.id;
-  const filteredEmp = employees.filter((employee) => employee.id !== employeeId);
-  if (employees.length === filteredEmp.length) {
-    res.send('Could not delete employee because it was not found');
-  } else {
-    fs.writeFile('src/data/employees.json', JSON.stringify(filteredEmp), (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send('Employee deleted');
-      }
-    });
-  }
-});
-
 module.exports = router;
