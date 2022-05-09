@@ -26,12 +26,5 @@
         "taskDescription": "Use of HTTP and query to validate data",
         "status": "Undone",
         "employeeID": "4"
-    },
-    {
-        "taskID": "5",
-        "taskName": "Backend creation",
-        "taskDescription": "Do the backend of the website",
-        "status": "Undone",
-        "employeeID": "5"
     }
 ]

@@ -70,4 +70,19 @@ router.post('/add', (req, res) => {
   });
 });
 
+router.delete('/delete/:taskID', (req, res) => {
+  const tasksId = req.params.taskID;
+  const idOfTasks = tasks.filter((task) => task.taskID !== tasksId);
+  if (tasks.length === idOfTasks.length) {
+    res.send('This task could not be found');
+  } else {
+    fs.writeFile('src/data/tasks.json', JSON.stringify(idOfTasks), (err) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send('Task deleted');
+      }
+    });
+  }
+});
 module.exports = router;
