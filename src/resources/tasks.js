@@ -4,11 +4,11 @@ const tasks = require('../data/tasks.json');
 
 const router = express.Router();
 
-router.get('/getAll', (req, res) => {
+router.get('/tasks', (req, res) => {
   res.send(tasks);
 });
 
-router.get('/getById/:taskID', (req, res) => {
+router.get('/taskId/:taskID', (req, res) => {
   const findTask = req.params.taskID;
   const taskFound = tasks.find((task) => task.taskID === findTask);
   if (taskFound) {
@@ -18,7 +18,7 @@ router.get('/getById/:taskID', (req, res) => {
   }
 });
 
-router.get('/getByName/:taskName', (req, res) => {
+router.get('/taskName/:taskName', (req, res) => {
   const nameTask = req.params.taskName;
   const taskNamed = tasks.filter((task) => task.taskName === nameTask);
   if (taskNamed.length > 0) {
@@ -28,7 +28,7 @@ router.get('/getByName/:taskName', (req, res) => {
   }
 });
 
-router.get('/getByDescription/:taskDescription', (req, res) => {
+router.get('/taskDescription/:taskDescription', (req, res) => {
   const descriptionTask = req.params.taskDescription;
   const descriptionOfTask = tasks.filter((task) => task.taskDescription === descriptionTask);
   if (descriptionOfTask.length > 0) {
@@ -38,7 +38,7 @@ router.get('/getByDescription/:taskDescription', (req, res) => {
   }
 });
 
-router.get('/getByStatus/:status', (req, res) => {
+router.get('/status/:status', (req, res) => {
   const taskStatus = req.params.status;
   const statusOfTask = tasks.filter((task) => task.status === taskStatus);
   if (statusOfTask.length > 0) {
@@ -48,7 +48,7 @@ router.get('/getByStatus/:status', (req, res) => {
   }
 });
 
-router.get('/getByEmployeeID/:employeeID', (req, res) => {
+router.get('/employee/:employeeID', (req, res) => {
   const emplId = req.params.employeeID;
   const idOfEmployee = tasks.filter((task) => task.employeeID === emplId);
   if (idOfEmployee.length > 0) {
@@ -58,7 +58,7 @@ router.get('/getByEmployeeID/:employeeID', (req, res) => {
   }
 });
 
-router.post('/add', (req, res) => {
+router.post('/task', (req, res) => {
   const taskData = req.body;
   const taskFound = tasks.find((task) => task.taskID === taskData.taskID);
   if (taskData.taskID && taskData.taskName && taskData.taskDescription
@@ -76,7 +76,7 @@ router.post('/add', (req, res) => {
   }
 });
 
-router.delete('/delete/:taskID', (req, res) => {
+router.delete('/task/:taskID', (req, res) => {
   const tasksId = req.params.taskID;
   const idOfTasks = tasks.filter((task) => task.taskID !== tasksId);
   if (tasks.length === idOfTasks.length) {
@@ -92,7 +92,7 @@ router.delete('/delete/:taskID', (req, res) => {
   }
 });
 
-router.put('/edit/:taskID', (req, res) => {
+router.put('/task/:taskID', (req, res) => {
   let tasksId = req.params.taskID;
   const jsonData = fs.readFileSync('src/data/tasks.json');
   const data = JSON.parse(jsonData);
