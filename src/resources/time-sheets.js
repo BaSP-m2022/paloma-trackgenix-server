@@ -54,14 +54,22 @@ router.get('/getByEmployeeID/:employeeID', (req, res) => {
 
 router.post('/Add', (req, res) => {
   const timesheetData = req.body;
+  const filterID = timesheets.find((timesheet) => timesheet.id === timesheetData.id);
   timesheets.push(timesheetData);
-  fs.writeFile('./src/data/time-sheets.json', JSON.stringify(timesheets), (err) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send('Timesheet added');
-    }
-  });
+  if (timesheetData.employeeID && timesheetData.id && timesheetData.name && timesheetData.surname
+    && timesheetData.role && timesheetData.startDate && timesheetData.finishDate
+    && timesheetData.regularHours && timesheetData.overtimeHours
+    && timesheetData.rate && timesheetData.project && timesheetData.task && !filterID) {
+    fs.writeFile('./src/data/time-sheets.json', JSON.stringify(timesheets), (err) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send('Timesheet added');
+      }
+    });
+  } else {
+    res.send('Incorrect data');
+  }
 });
 
 router.delete('/delete/:id', (req, res) => {
