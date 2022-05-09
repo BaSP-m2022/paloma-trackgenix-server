@@ -21,7 +21,7 @@ router.get('/getById/:id', (req, res) => {
 router.get('/getByRole/:role', (req, res) => {
   const userRole = req.params.role;
   const filteredUsers = employees.filter(
-    (employee) => employee.role === userRole
+    (employee) => employee.role === userRole,
   );
   if (filteredUsers.length > 0) {
     res.send(filteredUsers);
@@ -32,7 +32,7 @@ router.get('/getByRole/:role', (req, res) => {
 router.delete('/delete/:id', (req, res) => {
   const employeeId = req.params.id;
   const filteredEmp = employees.filter(
-    (employee) => employee.id !== employeeId
+    (employee) => employee.id !== employeeId,
   );
   if (employees.length === filteredEmp.length) {
     res.send('Could not delete employee because it was not found');
@@ -46,27 +46,30 @@ router.delete('/delete/:id', (req, res) => {
         } else {
           res.send('Employee deleted');
         }
-      }
+      },
     );
   }
 });
 
 router.post('/add', (req, res) => {
   const employeeData = req.body;
-  employees.push(employeeData);
-  fs.writeFile(
-    'src/data/employees.json',
-    JSON.stringify(employees),
-    (error) => {
-      if (error) {
-        res.send(error);
-      } else {
-        res.send('User created');
-      }
-    }
-  );
-
-  res.send('OKa');
+  const user = employees.find((employee) => employee.id === employeeData.id);
+  if (employeeData.id && employeeData.name && employeeData.lastName
+     && employeeData.email && employeeData.password && employeeData.role
+     && employeeData.role && employeeData.task && !user) {
+    employees.push(employeeData);
+    fs.writeFile(
+      'src/data/employees.json',
+      JSON.stringify(employees),
+      (error) => {
+        if (error) {
+          res.send(error);
+        } else {
+          res.send('User registered');
+        }
+      },
+    );
+  } else { res.send('Must have all fields completed and the id must be unique'); }
 });
 
 router.put('/edit/:id', (req, res) => {
