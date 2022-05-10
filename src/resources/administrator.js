@@ -7,11 +7,11 @@ const administrators = require('../data/admins.json');
 // Defining Router
 const router = express.Router();
 // gets all data in Json file
-router.get('/getAll', (req, res) => {
+router.get('/', (req, res) => {
   res.send(administrators);
 });
 // gets one admin by its id when find is used it only finds the 1st one
-router.get('/getById/:id', (req, res) => {
+router.get('/:id', (req, res) => {
   const adminId = req.params.id;
   const administrator = administrators.find((eachAdm) => eachAdm.id === adminId);
   if (administrator) {
@@ -41,7 +41,7 @@ router.get('/getByStatus/:status', (req, res) => {
   }
 });
 // Creation of a new admin.
-router.post('/add', (req, res) => {
+router.post('/', (req, res) => {
   const adminData = req.body;
   const adminFound = administrators.find((eachAdm) => eachAdm.id === adminData.id);
   // Validation in process, will be completed after finishing the exercise
@@ -60,7 +60,7 @@ router.post('/add', (req, res) => {
   }
 });
 // Delete of an existing admin.
-router.delete('/delete/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   const adminId = req.params.id;
   const filteredAdmins = administrators.filter((eachAdm) => eachAdm.id !== adminId);
   if (filteredAdmins.length === administrators.length) {
@@ -76,7 +76,7 @@ router.delete('/delete/:id', (req, res) => {
   }
 });
 // Edit users parameters.
-router.put('/edit/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   let adminId = req.params.id;
   const jsonData = fs.readFileSync('src/data/admins.json');
   const data = JSON.parse(jsonData);
