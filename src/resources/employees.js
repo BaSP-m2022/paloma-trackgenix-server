@@ -10,9 +10,7 @@ employeesRouter.get('/:id', (req, res) => {
 
   if (user) {
     res.send(user);
-  } else {
-    res.send('User not found');
-  }
+  } else { res.send('User not found'); }
 });
 
 employeesRouter.delete('/:id', (req, res) => {
@@ -29,9 +27,7 @@ employeesRouter.delete('/:id', (req, res) => {
       (err) => {
         if (err) {
           res.send(err);
-        } else {
-          res.send('Employee deleted');
-        }
+        } else { res.send('Employee deleted'); }
       },
     );
   }
@@ -52,9 +48,7 @@ employeesRouter.put('/:id', (req, res) => {
     data[userID].task = req.body.task;
     fs.writeFileSync('src/data/employees.json', JSON.stringify(data));
     res.json(data);
-  } else {
-    res.send('User not found');
-  }
+  } else { res.send('User not found'); }
 });
 
 module.exports = employeesRouter;
