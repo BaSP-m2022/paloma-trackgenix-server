@@ -5,12 +5,12 @@ const superAdmin = require('../data/super-admins.json');
 // bringing the json data
 const router = express.Router();
 // Get all the super admin
-router.get('/get', (req, res) => {
+router.get('/', (req, res) => {
   res.send(superAdmin);
   // bringing the json data saved in the const superAdmin
 });
 // Obtain a super admin
-router.get('/getById/:superAdminID', (req, res) => {
+router.get('/:superAdminID', (req, res) => {
   const findsuperAdmin = parseInt(req.params.superAdminID, 10);
   const superAdminFound = superAdmin.find((superAdminPara) => superAdminPara.ID === findsuperAdmin);
   if (superAdminFound) {
@@ -20,7 +20,7 @@ router.get('/getById/:superAdminID', (req, res) => {
   }
 });
 // Create a super admin
-router.post('/newSuperAdmin', (req, res) => {
+router.post('/', (req, res) => {
   const newSuperAdmin = {
     ID: superAdmin.length + 1,
     Name: req.body.Name,
@@ -44,7 +44,7 @@ router.post('/newSuperAdmin', (req, res) => {
   res.send('New Super Admin was created successfully');
 });
 // Delete superAdmin
-router.delete('/delete-superAdmin/:superAdminID', (req, res) => {
+router.delete('/:superAdminID', (req, res) => {
   const findSA = parseInt(req.params.superAdminID, 10);
   const filteredSA = superAdmin.filter((sa) => sa.ID !== findSA);
   if (superAdmin.length !== filteredSA.length) {
@@ -61,7 +61,7 @@ router.delete('/delete-superAdmin/:superAdminID', (req, res) => {
 });
 // Edit superAdmin
 
-router.put('/edit/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   let userID = parseInt(req.params.id, 10);
   const jsonData = fs.readFileSync(path.resolve(__dirname, '../data/super-admins.json'));
   const data = JSON.parse(jsonData);
