@@ -2,13 +2,13 @@ const express = require('express');
 const fs = require('fs');
 const timesheets = require('../data/time-sheets.json');
 
-const router = express.Router();
+const timesheetRouter = express.Router();
 
-router.get('/getAll', (req, res) => {
+timesheetRouter.get('/', (req, res) => {
   res.send(timesheets);
 });
 
-router.get('/getByTimesheet/:id', (req, res) => {
+timesheetRouter.get('/id/:id', (req, res) => {
   const timesheetID = req.params.id;
   const user = timesheets.find((timesheet) => timesheet.id === timesheetID);
 
@@ -19,7 +19,7 @@ router.get('/getByTimesheet/:id', (req, res) => {
   }
 });
 
-router.get('/getByRole/:role', (req, res) => {
+timesheetRouter.get('/role/:role', (req, res) => {
   const userRol = req.params.role;
   const user = timesheets.filter((timesheet) => timesheet.role === userRol);
 
@@ -30,7 +30,7 @@ router.get('/getByRole/:role', (req, res) => {
   }
 });
 
-router.get('/getByProject/:project', (req, res) => {
+timesheetRouter.get('/project/:project', (req, res) => {
   const { project } = req.params;
   const allProject = timesheets.filter((timesheet) => timesheet.project === project);
 
@@ -41,7 +41,7 @@ router.get('/getByProject/:project', (req, res) => {
   }
 });
 
-router.get('/getByEmployeeID/:employeeID', (req, res) => {
+timesheetRouter.get('/employee/:employeeID', (req, res) => {
   const employee = req.params.employeeID;
   const filterID = timesheets.find((timesheet) => timesheet.employeeID === employee);
 
@@ -52,7 +52,7 @@ router.get('/getByEmployeeID/:employeeID', (req, res) => {
   }
 });
 
-router.post('/Add', (req, res) => {
+timesheetRouter.post('/add/', (req, res) => {
   const timesheetData = req.body;
   const filterID = timesheets.find((timesheet) => timesheet.id === timesheetData.id);
   timesheets.push(timesheetData);
@@ -72,7 +72,7 @@ router.post('/Add', (req, res) => {
   }
 });
 
-router.delete('/delete/:id', (req, res) => {
+timesheetRouter.delete('/delete/:id', (req, res) => {
   const timesheetID = req.params.id;
   const filteredID = timesheets.filter(
     (ts) => ts.id !== timesheetID,
@@ -94,7 +94,7 @@ router.delete('/delete/:id', (req, res) => {
   }
 });
 
-router.put('/edit/:id', (req, res) => {
+timesheetRouter.put('/edit/:id', (req, res) => {
   let userID = req.params.id;
   const jsonData = fs.readFileSync('src/data/time-sheets.json');
   const data = JSON.parse(jsonData);
@@ -119,4 +119,4 @@ router.put('/edit/:id', (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = timesheetRouter;
