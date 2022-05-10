@@ -33,6 +33,8 @@ employeesRouter.delete('/:id', (req, res) => {
   }
 });
 
+// edit employee
+
 employeesRouter.put('/:id', (req, res) => {
   let userID = req.params.id;
   const jsonData = fs.readFileSync('src/data/employees.json');
