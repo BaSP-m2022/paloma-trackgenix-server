@@ -4,11 +4,11 @@ const tasks = require('../data/tasks.json');
 
 const router = express.Router();
 
-router.get('/tasks', (req, res) => {
+router.get('/', (req, res) => {
   res.send(tasks);
 });
 
-router.get('/taskId/:taskID', (req, res) => {
+router.get('/:taskID', (req, res) => {
   const findTask = req.params.taskID;
   const taskFound = tasks.find((task) => task.taskID === findTask);
   if (taskFound) {
@@ -58,7 +58,7 @@ router.get('/employee/:employeeID', (req, res) => {
   }
 });
 
-router.post('/task', (req, res) => {
+router.post('/', (req, res) => {
   const taskData = req.body;
   const taskFound = tasks.find((task) => task.taskID === taskData.taskID);
   if (taskData.taskID && taskData.taskName && taskData.taskDescription
@@ -76,7 +76,7 @@ router.post('/task', (req, res) => {
   }
 });
 
-router.delete('/task/:taskID', (req, res) => {
+router.delete('/:taskID', (req, res) => {
   const tasksId = req.params.taskID;
   const idOfTasks = tasks.filter((task) => task.taskID !== tasksId);
   if (tasks.length === idOfTasks.length) {
@@ -92,7 +92,7 @@ router.delete('/task/:taskID', (req, res) => {
   }
 });
 
-router.put('/task/:taskID', (req, res) => {
+router.put('/:taskID', (req, res) => {
   let tasksId = req.params.taskID;
   const jsonData = fs.readFileSync('src/data/tasks.json');
   const data = JSON.parse(jsonData);
