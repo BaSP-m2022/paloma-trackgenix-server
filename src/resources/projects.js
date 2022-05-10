@@ -8,11 +8,12 @@ router.get('/', (req, res) => {
   res.send(projects);
 });
 
+// I have included all atributes that cannot be left in blank in the if statement
 router.post('/', (req, res) => {
   const projectData = req.body;
-  if (projectData.projectID && projectData.projectName && projectData.totalHours
-    && projectData.projectDescription && projectData.startDate && projectData.finishDate
-    && projectData.rate && projectData.employeeID && projectData.role && projectData.status) {
+  if (projectData.projectID != null && projectData.projectName != null
+    && projectData.totalHours != null && projectData.projectDescription != null
+    && projectData.startDate != null && projectData.rate != null && projectData.status != null) {
     projects.push(projectData);
     fs.writeFile('src/data/projects.json', JSON.stringify(projects), (err) => {
       if (err) {
@@ -44,7 +45,7 @@ router.put('/:id', (req, res) => {
   res.json(data);
 });
 
-router.patch('/employee/:id', (req, res) => {
+router.put('/employee/:id', (req, res) => {
   const id = req.params.id - 1;
 
   const jsonData = fs.readFileSync('src/data/projects.json');

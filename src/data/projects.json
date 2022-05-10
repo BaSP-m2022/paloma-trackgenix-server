@@ -1,40 +1,50 @@
 [
-    {
-        "projectID": "1",
-        "projectName": "Project 1",
-        "totalHours": "100",
-        "projectDescription": "lorem",
-        "startDate": "11-20-2021",
-        "finishDate": "01-10-2022",
-        "rate": "20",
-        "employeeID": "1",
-        "role" : "PM",
-        "status": "Finished"
-    },
-
-    {
-        "projectID": "2",
-        "projectName": "Project 2",
-        "totalHours": "120",
-        "projectDescription": "lorem",
-        "startDate": "02-12-2022",
-        "finishDate": "03-31-2022",
-        "rate": "26",
-        "employeeID": "6",
-        "role" : "DEV",
-        "status": "Finished"
-    },
-
-    {
-        "projectID": "3",
-        "projectName": "Project 3",
-        "totalHours": "150",
-        "projectDescription": "lorem",
-        "startDate": "05-01-2022",
-        "finishDate": "",
-        "rate": "30.4",
-        "employeeID": "4",
-        "role" : "QA",
-        "status": "Not finished"
-    }
+  {
+    "projectID": "1",
+    "projectName": "Project 1",
+    "totalHours": "100",
+    "projectDescription": "lorem",
+    "startDate": "11-20-2021",
+    "finishDate": "01-10-2022",
+    "rate": "20",
+    "employeeID": "1",
+    "role": "PM",
+    "status": "Finished"
+  },
+  {
+    "projectID": "2",
+    "projectName": "Project 2",
+    "totalHours": "120",
+    "projectDescription": "lorem",
+    "startDate": "02-12-2022",
+    "finishDate": "03-31-2022",
+    "rate": "26",
+    "employeeID": "6",
+    "role": "DEV",
+    "status": "Finished"
+  },
+  {
+    "projectID": "3",
+    "projectName": "Project 3",
+    "totalHours": "150",
+    "projectDescription": "lorem",
+    "startDate": "05-01-2022",
+    "finishDate": "",
+    "rate": "30.4",
+    "employeeID": "4",
+    "role": "QA",
+    "status": "Not finished"
+  },
+  {
+    "projectID": "4",
+    "projectName": "Project 4",
+    "totalHours": "130",
+    "projectDescription": "lorem",
+    "startDate": "05-10-2022",
+    "finishDate": "06-02-2022",
+    "rate": "24",
+    "employeeID": "1",
+    "role": "QA",
+    "status": "In progress"
+  }
 ]
