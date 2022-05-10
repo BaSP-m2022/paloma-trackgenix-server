@@ -8,7 +8,7 @@ router.get('/getAll', (req, res) => {
   res.send(projects);
 });
 
-router.get('/getById/:projectID', (req, res) => {
+router.get('/Id/:projectID', (req, res) => {
   const findProject = req.params.projectID;
   const projectFound = projects.find((project) => project.projectID === findProject);
   if (projectFound) {
@@ -34,7 +34,7 @@ router.delete('/delete/:projectID', (req, res) => {
   }
 });
 
-router.get('/getByName/:projectName', (req, res) => {
+router.get('/Name/:projectName', (req, res) => {
   const nameProject = req.params.projectName;
   const projectNamed = projects.filter((project) => project.projectName === nameProject);
   if (projectNamed.length > 0) {
@@ -44,7 +44,7 @@ router.get('/getByName/:projectName', (req, res) => {
   }
 });
 
-router.get('/getByHours/:totalHours', (req, res) => {
+router.get('/Hours/:totalHours', (req, res) => {
   const hoursProject = req.params.totalHours;
   const projectTime = projects.filter((project) => project.totalHours === hoursProject);
   if (projectTime.length > 0) {
@@ -54,17 +54,7 @@ router.get('/getByHours/:totalHours', (req, res) => {
   }
 });
 
-router.get('/getByDescription/:projectDescription', (req, res) => {
-  const descProject = req.params.projectDescription;
-  const projectDescribed = projects.filter((project) => project.projectDescription === descProject);
-  if (projectDescribed.length > 0) {
-    res.send(projectDescribed);
-  } else {
-    res.send(`There is no project with "${descProject}" description`);
-  }
-});
-
-router.get('/getByDate/:startDate', (req, res) => {
+router.get('/Start-Date/:startDate', (req, res) => {
   const startProject = req.params.startDate;
   const projectStarted = projects.filter((project) => project.startDate === startProject);
   if (projectStarted.length > 0) {
@@ -74,7 +64,7 @@ router.get('/getByDate/:startDate', (req, res) => {
   }
 });
 
-router.get('/getByFinishDate/:finishDate', (req, res) => {
+router.get('/Finish-Date/:finishDate', (req, res) => {
   const finishProject = req.params.finishDate;
   const projectFinished = projects.filter((project) => project.finishDate === finishProject);
   if (projectFinished.length > 0) {
@@ -84,7 +74,7 @@ router.get('/getByFinishDate/:finishDate', (req, res) => {
   }
 });
 
-router.get('/getByRate/:rate', (req, res) => {
+router.get('/Rate/:rate', (req, res) => {
   const rateProject = req.params.rate;
   const projectRated = projects.filter((project) => project.rate === rateProject);
   if (projectRated.length > 0) {
@@ -94,7 +84,7 @@ router.get('/getByRate/:rate', (req, res) => {
   }
 });
 
-router.get('/getByEmployeeId/:employeeID', (req, res) => {
+router.get('/EmployeeId/:employeeID', (req, res) => {
   const employeeIdP = req.params.employeeID;
   const projectEmployee = projects.filter((project) => project.employeeID === employeeIdP);
   if (projectEmployee.length > 0) {
@@ -104,7 +94,7 @@ router.get('/getByEmployeeId/:employeeID', (req, res) => {
   }
 });
 
-router.get('/getByRole/:role', (req, res) => {
+router.get('/Role/:role', (req, res) => {
   const roleProject = req.params.role;
   const projectRole = projects.filter((project) => project.role === roleProject);
   if (projectRole.length > 0) {
@@ -114,7 +104,7 @@ router.get('/getByRole/:role', (req, res) => {
   }
 });
 
-router.get('/getByState/:state', (req, res) => {
+router.get('/State/:state', (req, res) => {
   const stateProject = req.params.state;
   const projectState = projects.filter((project) => project.state === stateProject);
   if (projectState.length > 0) {
