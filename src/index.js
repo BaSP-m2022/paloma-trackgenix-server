@@ -1,9 +1,9 @@
 // use "import" to import libraries
-import express from 'express';
+// import express from 'express';
 
 // use "require" to import JSON files
+const express = require('express');
 const admins = require('./data/admins.json');
-
 const projectRouter = require('./resources/projects');
 
 const app = express();

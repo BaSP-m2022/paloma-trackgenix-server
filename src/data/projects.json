@@ -6,9 +6,10 @@
         "projectDescription": "lorem",
         "startDate": "11-20-2021",
         "finishDate": "01-10-2022",
-        "Rate": "20",
-        "ProjectManagerID": "1",
-        "Status": "Finished"
+        "rate": "20",
+        "employeeID": "1",
+        "role" : "PM",
+        "status": "Finished"
     },
 
     {
@@ -18,9 +19,10 @@
         "projectDescription": "lorem",
         "startDate": "02-12-2022",
         "finishDate": "03-31-2022",
-        "Rate": "26",
-        "ProjectManagerID": "6",
-        "Status": "Finished"
+        "rate": "26",
+        "employeeID": "6",
+        "role" : "DEV",
+        "status": "Finished"
     },
 
     {
@@ -30,8 +32,9 @@
         "projectDescription": "lorem",
         "startDate": "05-01-2022",
         "finishDate": "",
-        "Rate": "30.4",
-        "ProjectManagerID": "4",
-        "Status": "Not finished"
+        "rate": "30.4",
+        "employeeID": "4",
+        "role" : "QA",
+        "status": "Not finished"
     }
 ]
