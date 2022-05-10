@@ -2,12 +2,9 @@ const express = require('express');
 const fs = require('fs');
 const employees = require('../data/employees.json');
 
-const router = express.Router();
+const employeesRouter = express.Router();
 
-router.get('/getAll', (req, res) => {
-  res.send(employees);
-});
-router.get('/getById/:id', (req, res) => {
+employeesRouter.get('/:id', (req, res) => {
   const userID = req.params.id;
   const user = employees.find((employee) => employee.id === userID);
 
@@ -18,18 +15,7 @@ router.get('/getById/:id', (req, res) => {
   }
 });
 
-router.get('/getByRole/:role', (req, res) => {
-  const userRole = req.params.role;
-  const filteredUsers = employees.filter(
-    (employee) => employee.role === userRole,
-  );
-  if (filteredUsers.length > 0) {
-    res.send(filteredUsers);
-  } else {
-    res.send(`There are no ${userRole} users`);
-  }
-});
-router.delete('/delete/:id', (req, res) => {
+employeesRouter.delete('/:id', (req, res) => {
   const employeeId = req.params.id;
   const filteredEmp = employees.filter(
     (employee) => employee.id !== employeeId,
@@ -51,28 +37,7 @@ router.delete('/delete/:id', (req, res) => {
   }
 });
 
-router.post('/add', (req, res) => {
-  const employeeData = req.body;
-  const user = employees.find((employee) => employee.id === employeeData.id);
-  if (employeeData.id && employeeData.name && employeeData.lastName
-     && employeeData.email && employeeData.password && employeeData.role
-     && employeeData.role && employeeData.task && !user) {
-    employees.push(employeeData);
-    fs.writeFile(
-      'src/data/employees.json',
-      JSON.stringify(employees),
-      (error) => {
-        if (error) {
-          res.send(error);
-        } else {
-          res.send('User registered');
-        }
-      },
-    );
-  } else { res.send('Must have all fields completed and the id must be unique'); }
-});
-
-router.put('/edit/:id', (req, res) => {
+employeesRouter.put('/:id', (req, res) => {
   let userID = req.params.id;
   const jsonData = fs.readFileSync('src/data/employees.json');
   const data = JSON.parse(jsonData);
@@ -91,4 +56,5 @@ router.put('/edit/:id', (req, res) => {
     res.send('User not found');
   }
 });
-module.exports = router;
+
+module.exports = employeesRouter;
