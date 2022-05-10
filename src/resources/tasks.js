@@ -28,16 +28,6 @@ router.get('/taskName/:taskName', (req, res) => {
   }
 });
 
-router.get('/taskDescription/:taskDescription', (req, res) => {
-  const descriptionTask = req.params.taskDescription;
-  const descriptionOfTask = tasks.filter((task) => task.taskDescription === descriptionTask);
-  if (descriptionOfTask.length > 0) {
-    res.send(descriptionOfTask);
-  } else {
-    res.send(`There is no task with "${descriptionTask}" description`);
-  }
-});
-
 router.get('/status/:status', (req, res) => {
   const taskStatus = req.params.status;
   const statusOfTask = tasks.filter((task) => task.status === taskStatus);
