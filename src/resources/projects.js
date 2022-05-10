@@ -4,11 +4,11 @@ const projects = require('../data/projects.json');
 
 const router = express.Router();
 
-router.get('/getAll', (req, res) => {
+router.get('/', (req, res) => {
   res.send(projects);
 });
 
-router.post('/add', (req, res) => {
+router.post('/', (req, res) => {
   const projectData = req.body;
   if (projectData.projectID && projectData.projectName && projectData.totalHours
     && projectData.projectDescription && projectData.startDate && projectData.finishDate
@@ -24,7 +24,7 @@ router.post('/add', (req, res) => {
   }
 });
 
-router.put('/update/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id - 1;
 
   const jsonData = fs.readFileSync('src/data/projects.json');
@@ -44,7 +44,7 @@ router.put('/update/:id', (req, res) => {
   res.json(data);
 });
 
-router.patch('/addEmployee/:id', (req, res) => {
+router.patch('/employee/:id', (req, res) => {
   const id = req.params.id - 1;
 
   const jsonData = fs.readFileSync('src/data/projects.json');
