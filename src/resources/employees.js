@@ -73,7 +73,7 @@ employeesRouter.post('/', (req, res) => {
   const user = employees.find((employee) => employee.id === employeeData.id);
   if (employeeData.id && employeeData.name && employeeData.lastName
      && employeeData.email && employeeData.password && employeeData.role
-     && employeeData.role && employeeData.task && !user) {
+     && employeeData.task && !user) {
     employees.push(employeeData);
     fs.writeFile(
       'src/data/employees.json',
