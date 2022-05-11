@@ -38,7 +38,9 @@ employeesRouter.post('/', (req, res) => {
         }
       },
     );
-  } else { res.send('Must have all fields completed and the id must be unique'); }
+  } else {
+    res.send('Must have all fields completed and the id must be unique');
+  }
 });
 
 module.exports = employeesRouter;
