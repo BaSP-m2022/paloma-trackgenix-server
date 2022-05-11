@@ -8,6 +8,7 @@ router.get('/', (req, res) => {
   res.send(projects);
 });
 
+
 // I have included all atributes that cannot be left in blank in the if statement
 router.post('/', (req, res) => {
   const projectData = req.body;
@@ -20,10 +21,33 @@ router.post('/', (req, res) => {
         res.send(err);
       } else {
         res.send('Project created');
+
+router.get('/:projectID', (req, res) => {
+  const findProject = req.params.projectID;
+  const projectFound = projects.find((project) => project.projectID === findProject);
+  if (projectFound) {
+    res.send(projectFound);
+  } else {
+    res.send('Project not found');
+  }
+});
+
+router.delete('/:projectID', (req, res) => {
+  const projectId = req.params.projectID;
+  const filteredProject = projects.filter((project) => project.projectID !== projectId);
+  if (projects.length === filteredProject.length) {
+    res.send('Could not delete the project because it was not found');
+  } else {
+    fs.writeFile('src/data/projects.json', JSON.stringify(filteredProject), (err) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send('Project deleted');
       }
     });
   }
 });
+
 
 router.put('/:id', (req, res) => {
   const id = req.params.id - 1;
@@ -43,6 +67,85 @@ router.put('/:id', (req, res) => {
 
   fs.writeFileSync('src/data/projects.json', JSON.stringify(data, null, 2));
   res.json(data);
+  
+router.get('/Name/:projectName', (req, res) => {
+  const nameProject = req.params.projectName;
+  const projectNamed = projects.filter((project) => project.projectName === nameProject);
+  if (projectNamed.length > 0) {
+    res.send(projectNamed);
+  } else {
+    res.send(`There is no project with "${nameProject}" name`);
+  }
+});
+
+router.get('/Hours/:totalHours', (req, res) => {
+  const hoursProject = req.params.totalHours;
+  const projectTime = projects.filter((project) => project.totalHours === hoursProject);
+  if (projectTime.length > 0) {
+    res.send(projectTime);
+  } else {
+    res.send(`There is no project with "${hoursProject}" hours`);
+  }
+});
+
+router.get('/Start-Date/:startDate', (req, res) => {
+  const startProject = req.params.startDate;
+  const projectStarted = projects.filter((project) => project.startDate === startProject);
+  if (projectStarted.length > 0) {
+    res.send(projectStarted);
+  } else {
+    res.send(`There is no projects launched on "${startProject}" `);
+  }
+});
+
+router.get('/Finish-Date/:finishDate', (req, res) => {
+  const finishProject = req.params.finishDate;
+  const projectFinished = projects.filter((project) => project.finishDate === finishProject);
+  if (projectFinished.length > 0) {
+    res.send(projectFinished);
+  } else {
+    res.send(`There is no projects ended on "${finishProject}" `);
+  }
+});
+
+router.get('/Rate/:rate', (req, res) => {
+  const rateProject = req.params.rate;
+  const projectRated = projects.filter((project) => project.rate === rateProject);
+  if (projectRated.length > 0) {
+    res.send(projectRated);
+  } else {
+    res.send(`There is no projects with a rate equal to "${rateProject}"`);
+  }
+});
+
+router.get('/EmployeeId/:employeeID', (req, res) => {
+  const employeeIdP = req.params.employeeID;
+  const projectEmployee = projects.filter((project) => project.employeeID === employeeIdP);
+  if (projectEmployee.length > 0) {
+    res.send(projectEmployee);
+  } else {
+    res.send(`There is no projects with a Employee with the ID number "${employeeIdP}"`);
+  }
+});
+
+router.get('/Role/:role', (req, res) => {
+  const roleProject = req.params.role;
+  const projectRole = projects.filter((project) => project.role === roleProject);
+  if (projectRole.length > 0) {
+    res.send(projectRole);
+  } else {
+    res.send(`There is no projects with the "${roleProject}" role`);
+  }
+});
+
+router.get('/State/:state', (req, res) => {
+  const stateProject = req.params.state;
+  const projectState = projects.filter((project) => project.state === stateProject);
+  if (projectState.length > 0) {
+    res.send(projectState);
+  } else {
+    res.send(`There is no projects with the "${stateProject}" state`);
+  }
 });
 
 module.exports = router;
