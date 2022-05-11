@@ -1,8 +1,12 @@
 // use "import" to import libraries
-import express from 'express';
+// import express from 'express';
 
 // use "require" to import JSON files
+const express = require('express');
 const admins = require('./data/admins.json');
+
+const projectEmployeeRouter = require('./resources/projects-employees');
+
 const sheetRouter = require('./resources/time-sheets');
 
 const employeesRouter = require('./resources/employees');
@@ -19,6 +23,9 @@ const port = process.env.PORT || 3000;
 
 // With this line and the body parser the server can obtain info from postman
 app.use(express.json());
+
+app.use('/project/employee', projectEmployeeRouter);
+
 app.use('/timesheets', sheetRouter);
 
 app.use('/projects', projectsRouter);
@@ -26,6 +33,7 @@ app.use('/projects', projectsRouter);
 app.use('/tasks', tasksRouter);
 
 app.use('/administrator', adminsRouter);
+
 
 app.get('/', async (req, res) => {
   res.send('Hello World!');
