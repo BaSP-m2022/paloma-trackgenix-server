@@ -29,8 +29,7 @@ app.get('/', async (req, res) => {
   res.send('Hello World!');
 });
 
-
-app.use('/employees', employeeRouter);
+app.use('/employees', employeesRouter);
 app.get('/admins', (req, res) => {
   res.status(200).json({
     data: admins,
