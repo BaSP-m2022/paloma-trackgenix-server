@@ -45,17 +45,4 @@ router.put('/:id', (req, res) => {
   res.json(data);
 });
 
-router.put('/employee/:id', (req, res) => {
-  const id = req.params.id - 1;
-
-  const jsonData = fs.readFileSync('src/data/projects.json');
-  const data = JSON.parse(jsonData);
-
-  data[id].employeeID = req.body.employeeID;
-  data[id].role = req.body.role;
-
-  fs.writeFileSync('src/data/projects.json', JSON.stringify(data, null, 2));
-  res.json(data);
-});
-
 module.exports = router;
