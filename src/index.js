@@ -3,6 +3,7 @@ import express from 'express';
 
 // use "require" to import JSON files
 const admins = require('./data/admins.json');
+const tasksRouter = require('./resources/tasks');
 
 const adminsRouter = require('./resources/administrator');
 
@@ -11,6 +12,7 @@ const port = process.env.PORT || 3000;
 
 // With this line and the body parser the server can obtain info from postman
 app.use(express.json());
+app.use('/tasks', tasksRouter);
 
 app.use('/administrator', adminsRouter);
 
