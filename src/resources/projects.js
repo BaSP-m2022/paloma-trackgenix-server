@@ -4,11 +4,11 @@ const projects = require('../data/projects.json');
 
 const router = express.Router();
 
-router.get('/getAll', (req, res) => {
+router.get('/', (req, res) => {
   res.send(projects);
 });
 
-router.get('/Id/:projectID', (req, res) => {
+router.get('/:projectID', (req, res) => {
   const findProject = req.params.projectID;
   const projectFound = projects.find((project) => project.projectID === findProject);
   if (projectFound) {
@@ -18,7 +18,7 @@ router.get('/Id/:projectID', (req, res) => {
   }
 });
 
-router.delete('/delete/:projectID', (req, res) => {
+router.delete('/:projectID', (req, res) => {
   const projectId = req.params.projectID;
   const filteredProject = projects.filter((project) => project.projectID !== projectId);
   if (projects.length === filteredProject.length) {
@@ -28,7 +28,7 @@ router.delete('/delete/:projectID', (req, res) => {
       if (err) {
         res.send(err);
       } else {
-        res.send('User deleted');
+        res.send('Project deleted');
       }
     });
   }
@@ -80,7 +80,7 @@ router.get('/Rate/:rate', (req, res) => {
   if (projectRated.length > 0) {
     res.send(projectRated);
   } else {
-    res.send(`There is no projects with a rate equal to "${rateProject}hs"`);
+    res.send(`There is no projects with a rate equal to "${rateProject}"`);
   }
 });
 
@@ -100,7 +100,7 @@ router.get('/Role/:role', (req, res) => {
   if (projectRole.length > 0) {
     res.send(projectRole);
   } else {
-    res.send(`There is no projects with the "${roleProject}" state`);
+    res.send(`There is no projects with the "${roleProject}" role`);
   }
 });
 
