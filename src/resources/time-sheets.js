@@ -8,7 +8,7 @@ timesheetRouter.get('/', (req, res) => {
   res.send(timesheets);
 });
 
-timesheetRouter.get('/id/:id', (req, res) => {
+timesheetRouter.get('/:id', (req, res) => {
   const timesheetID = req.params.id;
   const user = timesheets.find((timesheet) => timesheet.id === timesheetID);
 
@@ -23,7 +23,7 @@ timesheetRouter.get('/role/:role', (req, res) => {
   const userRol = req.params.role;
   const user = timesheets.filter((timesheet) => timesheet.role === userRol);
 
-  if (user) {
+  if (user.length > 0) {
     res.send(user);
   } else {
     res.send(`Users with ${userRol} rol not found`);
@@ -34,7 +34,7 @@ timesheetRouter.get('/project/:project', (req, res) => {
   const { project } = req.params;
   const allProject = timesheets.filter((timesheet) => timesheet.project === project);
 
-  if (allProject) {
+  if (allProject.length > 0) {
     res.send(allProject);
   } else {
     res.send(`Project ${project} not found`);
@@ -52,7 +52,7 @@ timesheetRouter.get('/employee/:employeeID', (req, res) => {
   }
 });
 
-timesheetRouter.post('/add/', (req, res) => {
+timesheetRouter.post('/', (req, res) => {
   const timesheetData = req.body;
   const filterID = timesheets.find((timesheet) => timesheet.id === timesheetData.id);
   timesheets.push(timesheetData);
@@ -72,7 +72,7 @@ timesheetRouter.post('/add/', (req, res) => {
   }
 });
 
-timesheetRouter.delete('/delete/:id', (req, res) => {
+timesheetRouter.delete('/:id', (req, res) => {
   const timesheetID = req.params.id;
   const filteredID = timesheets.filter(
     (ts) => ts.id !== timesheetID,
