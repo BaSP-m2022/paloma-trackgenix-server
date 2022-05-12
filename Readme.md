@@ -45,7 +45,7 @@ npm run lint:fix
 | :-----: | :-----: | :-----: | :-----: |
 <img src="https://avatars.githubusercontent.com/u/12973428?v=4" height="50" width="50">| Carla Vigil | carvigil21@gmail.com | [@carvigil](https://github.com/carvigil)
 <img src="https://avatars.githubusercontent.com/u/74018918?v=4" height="50" width="50">| Agustín Chazarreta | alchazarreta0@gmail.com | [@agustin-chazarreta](https://github.com/agustin-chazarreta/)
-<img src="https://avatars.githubusercontent.com/u/65920932?v=4" height="50" width="50">| Federico Bruschi | fedejbruschi@gmail.com | [@federbus64](https://github.com/fedebrus64/)
+<img src="https://avatars.githubusercontent.com/u/65920932?v=4" height="50" width="50">| Federico Bruschi | fedejbruschi@gmail.com | [@fedebrus64](https://github.com/fedebrus64/)
 <img src="https://avatars.githubusercontent.com/u/101214100?v=4" height="50" width="50">| Gabriel Sierra | sierragabriel456@gmail.com | [@gabriel5050](https://github.com/gabriel5050)
 <img src="https://avatars.githubusercontent.com/u/101070819?v=4" height="50" width="50">| Hernán Cazeneuve | hernancazeneuve@gmail.com | [@hernancazeneuve](https://github.com/hernancazeneuve)
 <img src="https://avatars.githubusercontent.com/u/101225519?v=4" height="50" width="50">| Juan Bautista Santomero | juanbautista.santomero@gmail.com | [@juanbsantomero](https://github.com/juanbsantomero)
