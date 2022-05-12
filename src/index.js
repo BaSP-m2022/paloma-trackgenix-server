@@ -13,8 +13,6 @@ const express = require('express');
 
 const admins = require('./data/admins.json');
 
-const superAdmins = require('./data/super-admins.json');
-
 const superAdminRouter = require('./controllers/super-admins');
 
 const projectEmployeeRouter = require('./controllers/projects-employees');
@@ -37,6 +35,7 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.use('/super-admins', superAdminRouter);
+
 app.use('/project/employee', projectEmployeeRouter);
 
 app.use('/timesheets', sheetRouter);
@@ -58,15 +57,6 @@ app.get('/admins', (req, res) => {
     data: admins,
   });
 });
-app.get('/super-admins', (req, res) => {
-  res.status(200).json({
-
-    data: superAdmins,
-
-  });
-});
-
-app.use('/employees', employeesRouter);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
