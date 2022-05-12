@@ -28,20 +28,24 @@ router.post('/', (req, res) => {
     email: req.body.email,
     Password: req.body.Password,
   };
-  const file = fs.readFileSync(path.resolve(__dirname, '../data/super-admins.json'));
-  // fs allows me to edit the file, readFileSync allows me to read it,
-  // and path.resolve helps the program to find the file
-  const data = JSON.parse(file);
-  // converts the JSON in an array
-  data.push(newSuperAdmin);
-  const newData = JSON.stringify(data);
-  fs.writeFile(path.resolve(__dirname, '../data/super-admins.json'), newData, (err) => {
-    if (err) {
-      res.send(err);
-    }
-    // rewrites the file with the new array
-  });
-  res.send('New Super Admin was created successfully');
+  if (req.body.Name !== '' && req.body.LastName !== '' && req.body.Password !== '' && req.body.email !== '') {
+    const file = fs.readFileSync(path.resolve(__dirname, '../data/super-admins.json'));
+    // fs allows me to edit the file, readFileSync allows me to read it,
+    // and path.resolve helps the program to find the file
+    const data = JSON.parse(file);
+    // converts the JSON in an array
+    data.push(newSuperAdmin);
+    const newData = JSON.stringify(data);
+    fs.writeFile(path.resolve(__dirname, '../data/super-admins.json'), newData, (err) => {
+      if (err) {
+        res.send(err);
+      }
+      // rewrites the file with the new array
+    });
+    res.send('New Super Admin was created successfully');
+  } else {
+    res.send('There is an error');
+  }
 });
 // Delete superAdmin
 router.delete('/:superAdminID', (req, res) => {
