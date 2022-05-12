@@ -7,19 +7,19 @@ const admins = require('./data/admins.json');
 
 const superAdmins = require('./data/super-admins.json');
 
-const superAdminRouter = require('./resources/super-admins');
+const superAdminRouter = require('./controllers/super-admins');
 
-const projectEmployeeRouter = require('./resources/projects-employees');
+const projectEmployeeRouter = require('./controllers/projects-employees');
 
-const sheetRouter = require('./resources/time-sheets');
+const sheetRouter = require('./controllers/time-sheets');
 
-const employeesRouter = require('./resources/employees');
+const employeesRouter = require('./controllers/employees');
 
-const projectsRouter = require('./resources/projects');
+const projectsRouter = require('./controllers/projects');
 
-const tasksRouter = require('./resources/tasks');
+const tasksRouter = require('./controllers/tasks');
 
-const adminsRouter = require('./resources/administrator');
+const adminsRouter = require('./controllers/administrator');
 
 const app = express();
 
