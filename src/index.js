@@ -1,7 +1,7 @@
 // use "import" to import libraries
 // import mongoose from 'mongoose';
 // use "require" to import JSON files
-// const mongoDBURL = '';
+// const mongoDBURL = 'mongodb+srv://cluster0.caoft.mongodb.net/BaSP-database?appName=mongosh+1.3.1';
 
 // const { default: mongoose } = require('mongoose');
 
