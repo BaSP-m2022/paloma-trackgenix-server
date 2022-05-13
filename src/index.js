@@ -1,13 +1,13 @@
 // use "import" to import libraries
-// import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 // use "require" to import JSON files
-// const mongoDBURL = 'mongodb+srv://cluster0.caoft.mongodb.net/BaSP-database?appName=mongosh+1.3.1';
+const mongoDBURL = 'mongodb+srv://cluster0.caoft.mongodb.net/BaSP-database?appName=mongosh+1.3.1';
 
 // const { default: mongoose } = require('mongoose');
 
-// mongoose.connect(mongoDBURL, () => {
-//   console.log('Connected to the database');
-// }, (error) => console.log(`Failed to connect to the database ${error}`));
+mongoose.connect(mongoDBURL, () => {
+  console.log('Connected to the database');
+}, (error) => console.log(`Failed to connect to the database ${error}`));
 
 const express = require('express');
 
