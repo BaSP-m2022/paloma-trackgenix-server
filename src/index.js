@@ -1,25 +1,31 @@
 // use "import" to import libraries
-
+// import mongoose from 'mongoose';
 // use "require" to import JSON files
+// const mongoDBURL = 'mongodb+srv://cluster0.caoft.mongodb.net/BaSP-database?appName=mongosh+1.3.1';
+
+// const { default: mongoose } = require('mongoose');
+
+// mongoose.connect(mongoDBURL, () => {
+//   console.log('Connected to the database');
+// }, (error) => console.log(`Failed to connect to the database ${error}`));
+
 const express = require('express');
 
 const admins = require('./data/admins.json');
 
-const superAdmins = require('./data/super-admins.json');
+const superAdminRouter = require('./controllers/super-admins');
 
-const superAdminRouter = require('./resources/super-admins');
+const projectEmployeeRouter = require('./controllers/projects-employees');
 
-const projectEmployeeRouter = require('./resources/projects-employees');
+const sheetRouter = require('./controllers/time-sheets');
 
-const sheetRouter = require('./resources/time-sheets');
+const employeesRouter = require('./controllers/employees');
 
-const employeesRouter = require('./resources/employees');
+const projectsRouter = require('./controllers/projects');
 
-const projectsRouter = require('./resources/projects');
+const tasksRouter = require('./controllers/tasks');
 
-const tasksRouter = require('./resources/tasks');
-
-const adminsRouter = require('./resources/administrator');
+const adminsRouter = require('./controllers/administrator');
 
 const app = express();
 
@@ -49,12 +55,6 @@ app.get('/', async (req, res) => {
 app.get('/admins', (req, res) => {
   res.status(200).json({
     data: admins,
-  });
-});
-
-app.get('/super-admins', (req, res) => {
-  res.status(200).json({
-    data: superAdmins,
   });
 });
 

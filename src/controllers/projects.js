@@ -24,7 +24,6 @@ router.post('/', (req, res) => {
     });
   }
 });
-
 router.get('/:projectID', (req, res) => {
   const findProject = req.params.projectID;
   const projectFound = projects.find((project) => project.projectID === findProject);
@@ -70,7 +69,6 @@ router.put('/:id', (req, res) => {
   fs.writeFileSync('src/data/projects.json', JSON.stringify(data, null, 2));
   res.json(data);
 });
-
 router.get('/Name/:projectName', (req, res) => {
   const nameProject = req.params.projectName;
   const projectNamed = projects.filter((project) => project.projectName === nameProject);
