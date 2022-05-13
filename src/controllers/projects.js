@@ -8,7 +8,6 @@ router.get('/', (req, res) => {
   res.send(projects);
 });
 
-
 // I have included all atributes that cannot be left in blank in the if statement
 router.post('/', (req, res) => {
   const projectData = req.body;
@@ -21,7 +20,10 @@ router.post('/', (req, res) => {
         res.send(err);
       } else {
         res.send('Project created');
-
+      }
+    });
+  }
+});
 router.get('/:projectID', (req, res) => {
   const findProject = req.params.projectID;
   const projectFound = projects.find((project) => project.projectID === findProject);
@@ -48,7 +50,6 @@ router.delete('/:projectID', (req, res) => {
   }
 });
 
-
 router.put('/:id', (req, res) => {
   const id = req.params.id - 1;
 
@@ -67,7 +68,7 @@ router.put('/:id', (req, res) => {
 
   fs.writeFileSync('src/data/projects.json', JSON.stringify(data, null, 2));
   res.json(data);
-  
+});
 router.get('/Name/:projectName', (req, res) => {
   const nameProject = req.params.projectName;
   const projectNamed = projects.filter((project) => project.projectName === nameProject);

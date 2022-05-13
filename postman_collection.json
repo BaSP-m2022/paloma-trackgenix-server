@@ -1,0 +1,29 @@
+{
+	"info": {
+		"_postman_id": "60ea43f0-58fc-448c-88ee-cb27ee7f7f06",
+		"name": "BaSP Trackgenix",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Admins",
+			"item": []
+		},
+		{
+			"name": "SuperAdmin",
+			"item": []
+		},
+		{
+			"name": "TimeSheets",
+			"item": []
+		},
+		{
+			"name": "Employees",
+			"item": []
+		},
+		{
+			"name": "Tasks",
+			"item": []
+		}
+	]
+}
