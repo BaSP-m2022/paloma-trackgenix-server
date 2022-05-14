@@ -1,6 +1,6 @@
 const express = require('express');
 const fs = require('fs');
-const timesheets = require('../data/time-sheets.json');
+const timesheets = require('../models/Timesheets');
 
 const timesheetRouter = express.Router();
 
@@ -60,13 +60,13 @@ timesheetRouter.post('/', (req, res) => {
     && timesheetData.role && timesheetData.startDate && timesheetData.finishDate
     && timesheetData.regularHours && timesheetData.overtimeHours
     && timesheetData.rate && timesheetData.project && timesheetData.task && !filterID) {
-    fs.writeFile('./src/data/time-sheets.json', JSON.stringify(timesheets), (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send('Timesheet added');
-      }
-    });
+    // fs.writeFile('./src/data/time-sheets.json', JSON.stringify(timesheets), (err) => {
+    //   if (err) {
+    //     res.send(err);
+    //   } else {
+    //     res.send('Timesheet added');
+    //   }
+    // });
   } else {
     res.send('Incorrect data');
   }
@@ -80,17 +80,17 @@ timesheetRouter.delete('/:id', (req, res) => {
   if (timesheets.length === filteredID.length) {
     res.send(`Timsheet ${timesheetID} not found`);
   } else {
-    fs.writeFile(
-      'src/data/time-sheets.json',
-      JSON.stringify(filteredID),
-      (err) => {
-        if (err) {
-          res.send(err);
-        } else {
-          res.send('timesheet deleted');
-        }
-      },
-    );
+    // fs.writeFile(
+    //   'src/data/time-sheets.json',
+    //   JSON.stringify(filteredID),
+    //   (err) => {
+    //     if (err) {
+    //       res.send(err);
+    //     } else {
+    //       res.send('timesheet deleted');
+    //     }
+    //   },
+    // );
   }
 });
 
@@ -112,8 +112,8 @@ timesheetRouter.put('/edit/:id', (req, res) => {
     data[userID].rate = req.body.rate;
     data[userID].project = req.body.project;
     data[userID].task = req.body.task;
-    fs.writeFileSync('src/data/time-sheets.json', JSON.stringify(data));
-    res.json(data);
+    // fs.writeFileSync('src/data/time-sheets.json', JSON.stringify(data));
+    // res.json(data);
   } else {
     res.send('User not found');
   }
