@@ -6,10 +6,9 @@ const mongoDBURL = 'mongodb+srv://cluster0.caoft.mongodb.net/BaSP-database?appNa
 // const { default: mongoose } = require('mongoose');
 
 mongoose.connect(mongoDBURL, () => {
-  /* eslint-disable no-console */
   console.log('Connected to the database');
 }, (error) => console.log(`Failed to connect to the database ${error}`));
-/* eslint-disable no-console */
+
 const express = require('express');
 
 const admins = require('./data/admins.json');
