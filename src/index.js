@@ -27,6 +27,8 @@ const tasksRouter = require('./controllers/tasks');
 
 const adminsRouter = require('./controllers/administrator');
 
+// const indexRoutes = require('./routes/index');
+
 const app = express();
 
 const port = process.env.PORT || 3000;
@@ -45,6 +47,8 @@ app.use('/projects', projectsRouter);
 app.use('/tasks', tasksRouter);
 
 app.use('/administrator', adminsRouter);
+
+// app.use('/', indexRoutes);
 
 app.get('/', async (req, res) => {
   res.send('Hello World!');
