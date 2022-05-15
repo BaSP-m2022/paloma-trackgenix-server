@@ -1,4 +1,55 @@
-const express = require('express');
+import Projects from '../models/Projects';
+
+const getAllProjects = async (req, res) => {
+  try {
+    const allProjects = await Projects.find({});
+    return res.status(200).json(allProjects);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      msg: 'Error',
+    });
+  }
+};
+
+const getProjectsById = async (req, res) => {
+  try {
+    if (req.params.id) {
+      const project = await Projects.findById(req.params.id);
+      return res.status(200).json(project);
+    }
+    return res.status(400).json({
+      msg: 'missing id parameter',
+    });
+  } catch (error) {
+    return res.json({
+      msg: error,
+    });
+  }
+};
+
+const createProject = async (req, res) => {
+  try {
+    const project = new Projects({
+      projectName: req.body.projectName,
+      totalHours: req.body.totalHours,
+      projectDescription: req.body.projectDescription,
+      startDate: req.body.startDate,
+      finishDate: req.body.finishDate,
+      rate: req.body.rate,
+      employeeID: req.body.employeeID,
+      role: req.body.role,
+      state: req.body.state,
+    });
+    const result = await project.save();
+    return res.status(201).json(result);
+  } catch (error) {
+    return res.json({ message: 'There was an error saving the employee' });
+  }
+};
+
+export default { getAllProjects, getProjectsById, createProject };
+/* const express = require('express');
 const fs = require('fs');
 const projects = require('../data/projects.json');
 
@@ -149,4 +200,4 @@ router.get('/State/:state', (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = router; */

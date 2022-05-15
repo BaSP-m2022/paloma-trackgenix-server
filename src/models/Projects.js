@@ -12,5 +12,9 @@ const projects = new Schema({
   employeeID: { type: Number, required: true },
   role: { type: String, required: true },
   state: { type: String, required: true },
+}, {
+  collection: 'Projects',
+  versionKey: false,
 });
-export default projects;
+
+export default mongoose.model('Projects', projects);
