@@ -1,4 +1,56 @@
-const express = require('express');
+// eslint-disable-next-line import/no-import-module-exports
+import Employees from '../models/Employees';
+
+// const express = require('express');
+
+const getAllEmployees = async (req, res) => {
+  try {
+    const allEmployees = await Employees.find({});
+    return res.status(200).json(allEmployees);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'There was an error',
+    });
+  }
+};
+
+const getEmployeesById = async (req, res) => {
+  try {
+    if (req.params.id) {
+      const employee = await Employees.findById(req.params.id);
+      return res.status(200).json(employee);
+    } return res.status(400).json({
+      message: 'There is no such Id',
+    });
+  } catch (error) {
+    return res.json({
+      message: error,
+    });
+  }
+};
+
+const createEmployees = async (req, res) => {
+  try {
+    const employee = new Employees({
+      name: req.body.name,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      password: req.body.password,
+      assignedRole: req.body.assignedRole,
+      assignedTask: req.body.assignedTask,
+    });
+
+    const result = await employee.save();
+    return res.status(201).json(result);
+  } catch (error) {
+    return res.json({ message: 'There was an error saving the employee' });
+  }
+};
+
+// module.exports = employeesController;
+
+/*
 const fs = require('fs');
 const employees = require('../data/employees.json');
 
@@ -92,3 +144,9 @@ employeesRouter.post('/', (req, res) => {
 });
 
 module.exports = employeesRouter;
+*/
+export default {
+  getAllEmployees,
+  getEmployeesById,
+  createEmployees,
+};
