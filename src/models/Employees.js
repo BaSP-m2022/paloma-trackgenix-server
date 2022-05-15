@@ -12,4 +12,4 @@ const employee = new Schema({
   assignedTask: { type: string, required: true },
 });
 
-export default employee;
+export default mongoose.model('employee', employee);
