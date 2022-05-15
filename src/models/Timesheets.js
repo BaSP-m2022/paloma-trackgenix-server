@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const { Schema } = mongoose.Schema;
+const { Schema } = mongoose;
 
 const timeSheetSchema = new Schema(
   {
@@ -14,6 +14,10 @@ const timeSheetSchema = new Schema(
     rate: { type: Number, required: true },
     project: { type: String, required: true },
     task: { type: String, required: true },
+  },
+  {
+    collection: 'Timesheet',
+    versionKey: false,
   },
 );
 
