@@ -6,8 +6,8 @@ const validateEmployee = (req, res, next) => {
     lastname: Joi.string().min(3).required(),
     email: Joi.string().email().pattern(/\/[a-z0-9]+@[a-z]+[a-z]{2,3}\//).required(),
     password: Joi.string().min(6).required(),
-    // assignedRole: Joi.string().valid('QA', 'DEV', 'TL', 'PM').optional(),
-    // assignedTask: Joi.string().optional(),
+    assignedRole: Joi.string().valid('QA', 'DEV', 'TL', 'PM').optional(),
+    assignedTask: Joi.string().optional(),
   });
 
   // Validate Schema with the body of the request
