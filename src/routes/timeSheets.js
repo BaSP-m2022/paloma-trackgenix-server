@@ -7,8 +7,8 @@ const router = express.Router();
 router
   .get('/', timeSheetsController.getAllTimeSheets)
   .get('/:id', timeSheetsController.getTimeSheetsById)
-  .post('/', timeSheetsValidation.validateTimesheet, timeSheetsController.createTimesheet);
-//   .put('/:id', timeSheetsValidation.validateTimesheet, timeSheetsController)
-//   .delete('/:id', timeSheetsController);
+  .post('/', timeSheetsValidation.validateTimesheet, timeSheetsController.createTimesheet)
+  .put('/:id', timeSheetsValidation.validateTimesheet, timeSheetsController.editTimesheet)
+  .delete('/:id', timeSheetsController.deleteTimeSheet);
 
 export default router;
