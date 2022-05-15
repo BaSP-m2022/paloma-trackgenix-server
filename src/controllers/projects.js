@@ -3,6 +3,8 @@ const fs = require('fs');
 const projects = require('../data/projects.json');
 
 const router = express.Router();
+// I bring the validations here.
+const { schema } = require('../validations/projects');
 
 router.get('/', (req, res) => {
   res.send(projects);
@@ -11,10 +13,13 @@ router.get('/', (req, res) => {
 // I have included all atributes that cannot be left in blank in the if statement
 router.post('/', (req, res) => {
   const projectData = req.body;
-  if (projectData.projectID != null && projectData.projectName != null
+  // Validates the data sent by postman in the body, watching the validation file
+  const result = schema.validateAsync(projectData);
+  /* if (projectData.projectID != null && projectData.projectName != null
     && projectData.totalHours != null && projectData.projectDescription != null
     && projectData.startDate != null && projectData.rate != null && projectData.status != null) {
-    projects.push(projectData);
+    projects.push(projectData); */
+  if (result) {
     fs.writeFile('src/data/projects.json', JSON.stringify(projects), (err) => {
       if (err) {
         res.send(err);
