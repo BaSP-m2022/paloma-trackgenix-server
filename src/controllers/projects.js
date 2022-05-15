@@ -48,7 +48,63 @@ const createProject = async (req, res) => {
   }
 };
 
-export default { getAllProjects, getProjectsById, createProject };
+const deleteProject = async (req, res) => {
+  try {
+    if (!req.params.id) {
+      return res.status(400).json({
+        msg: 'missing id parameter',
+      });
+    }
+    const result = await Projects.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({
+        msg: 'The super admin has not been found',
+      });
+    }
+    return res.status(200).json({
+      msg: 'Deleted!',
+    });
+  } catch (error) {
+    return res.json({
+      msg: 'an error has ocurred',
+    });
+  }
+};
+
+const editProject = async (req, res) => {
+  try {
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing id parameter',
+      });
+    }
+    const result = await Projects.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
+    );
+    if (!result) {
+      return res.status(404).json({
+        message: 'The employee has not been found',
+      });
+    }
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.json({
+      message: 'An error occurred',
+      error: error.details[0].message,
+    });
+  }
+};
+
+export default {
+  getAllProjects,
+  getProjectsById,
+  createProject,
+  deleteProject,
+  editProject,
+};
+
 /* const express = require('express');
 const fs = require('fs');
 const projects = require('../data/projects.json');
