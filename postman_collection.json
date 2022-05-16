@@ -24,6 +24,10 @@
 		{
 			"name": "Tasks",
 			"item": []
+		},
+        {
+			"name": "Projects",
+			"item": []
 		}
 	]
 }
