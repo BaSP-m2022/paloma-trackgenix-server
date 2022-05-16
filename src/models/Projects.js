@@ -9,7 +9,7 @@ const projects = new Schema({
   startDate: { type: Date, required: true },
   finishDate: { type: Date, required: false },
   rate: { type: Number, required: true },
-  employeeID: { type: Number, required: true },
+  employeeID: { type: String, required: true },
   role: { type: String, required: true },
   state: { type: String, required: true },
 }, {
