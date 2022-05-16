@@ -7,7 +7,120 @@
 	"item": [
 		{
 			"name": "Admins",
-			"item": []
+			"item": [
+				{
+					"name": "Create Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n    {\r\n        \"name\": \"prueba\",\r\n        \"lastName\": \"prueba\",\r\n        \"email\": \"prueba@mail.com\",\r\n        \"gender\": \"male\",\r\n        \"active\": false\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/admin/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/admin",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Admin by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/admin/6282645e2efb46ffc26117b6",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								"6282645e2efb46ffc26117b6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Damian\",\r\n    \"lastName\": \"Lopez\",\r\n    \"email\": \"dlopez@mail.com\",\r\n    \"gender\": \"male\",\r\n    \"active\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/admin/62825d854d1720f72dbeea65",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								"62825d854d1720f72dbeea65"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/admin/6282651edef755870b4d6c86",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								"6282651edef755870b4d6c86"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "SuperAdmin",
@@ -23,6 +136,10 @@
 		},
 		{
 			"name": "Tasks",
+			"item": []
+		},
+		{
+			"name": "Proyects",
 			"item": []
 		}
 	]
