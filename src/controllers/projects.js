@@ -23,7 +23,7 @@ const getProjectsById = async (req, res) => {
     });
   } catch (error) {
     return res.json({
-      msg: error,
+      msg: 'error',
     });
   }
 };
@@ -44,7 +44,7 @@ const createProject = async (req, res) => {
     const result = await project.save();
     return res.status(201).json(result);
   } catch (error) {
-    return res.json({ message: 'There was an error saving the employee' });
+    return res.json({ message: 'There was an error saving the project' });
   }
 };
 
@@ -58,7 +58,7 @@ const deleteProject = async (req, res) => {
     const result = await Projects.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
-        msg: 'The super admin has not been found',
+        msg: 'The project has not been found',
       });
     }
     return res.status(200).json({
@@ -85,7 +85,7 @@ const editProject = async (req, res) => {
     );
     if (!result) {
       return res.status(404).json({
-        message: 'The employee has not been found',
+        message: 'The project has not been found',
       });
     }
     return res.status(200).json(result);
