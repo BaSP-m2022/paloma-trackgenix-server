@@ -1,15 +1,11 @@
 // use "import" to import libraries
-// import mongoose from 'mongoose';
-// import express from 'express';
-// import bodyParser from 'body-parser';
-// import router from './routes';
-
-const mongoose = require('mongoose');
-const express = require('express');
-const bodyParser = require('body-parser');
-const router = require('./routes');
-
+import mongoose from 'mongoose';
+import express from 'express';
+import bodyParser from 'body-parser';
+import router from './routes';
 // use "require" to import JSON files
+// mongodb+srv://BaSP:<password>@cluster0.caoft.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+// mongosh "mongodb+srv://cluster0.caoft.mongodb.net/myFirstDatabase" --apiVersion 1 --username BaSP
 const mongoDBURL = 'mongodb+srv://BaSP:BaSP2022@cluster0.caoft.mongodb.net/BaSP-database?appName=mongosh+1.3.1';
 
 mongoose.connect(mongoDBURL, () => {
