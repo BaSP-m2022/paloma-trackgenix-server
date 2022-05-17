@@ -6,7 +6,7 @@ const getAllAdmins = async (req, res) => {
     const allAdmins = await Admin.find({});
     return res.status(200).json(allAdmins);
   } catch (error) {
-    res.status(500).json({
+    res.json({
       message: 'There was an error getting all admins',
       data: {},
       error: true,
@@ -26,7 +26,7 @@ const getAdminById = async (req, res) => {
       error: true,
     });
   } catch (error) {
-    return res.status(500).json({
+    return res.json({
       message: 'There was an error getting an admin by id',
       data: {},
       error: true,
@@ -34,6 +34,7 @@ const getAdminById = async (req, res) => {
   }
 };
 
+// eslint-disable-next-line consistent-return
 const createAdmin = async (req, res) => {
   try {
     const admin = new Admin({
@@ -43,12 +44,24 @@ const createAdmin = async (req, res) => {
       gender: req.body.gender,
       active: req.body.active,
     });
-    const result = await admin.save();
-    return res.status(200).json(result);
+    const result = await admin.save((error, adm) => {
+      if (error) {
+        return res.status(400).json({
+          message: 'There was an error. Check the data.',
+          data: adm,
+          error: true,
+        });
+      }
+      return res.status(201).json({
+        message: 'Admin created',
+        data: result,
+        error: false,
+      });
+    });
   } catch (error) {
-    return res.status(500).json({
+    return res.json({
       message: 'There was an error creating admin',
-      data: {},
+      data: undefined,
       error: true,
     });
   }
@@ -59,6 +72,8 @@ const editAdmin = async (req, res) => {
     if (!req.params) {
       return res.status(400).json({
         message: 'Missing id parameter',
+        data: undefined,
+        error: true,
       });
     }
     const result = await Admin.findByIdAndUpdate(
@@ -82,23 +97,23 @@ const editAdmin = async (req, res) => {
 
 const deleteAdmin = async (req, res) => {
   try {
-    if (!req.params.id) {
-      return res.status(400).json({
-        msg: 'Missing id parameter',
-      });
-    }
     const result = await Admin.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
         msg: 'The admin was not found',
+        data: undefined,
+        error: true,
       });
     }
-    return res.status(200).json({
-      msg: 'Deleted the admin!',
+    return res.status(204).json({
+      msg: 'Deleted admin!',
+      data: result,
+      error: false,
     });
   } catch (error) {
     return res.json({
       msg: 'There was an error deleting the admin',
+      error: true,
     });
   }
 };
