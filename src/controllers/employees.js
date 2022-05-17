@@ -44,6 +44,7 @@ const createEmployees = async (req, res) => {
     const result = await employee.save();
     return res.status(201).json(result);
   } catch (error) {
+    console.log(error);
     return res.json({ message: 'There was an error saving the employee' });
   }
 };
