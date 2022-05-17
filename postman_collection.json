@@ -11,7 +11,116 @@
 		},
 		{
 			"name": "SuperAdmin",
-			"item": []
+			"item": [
+				{
+					"name": "Get All Super Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/superadmins",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"superadmins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get superadmin by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/superadmins/62825151c2380439abdfa148",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"superadmins",
+								"62825151c2380439abdfa148"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Super Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/superadmins/6283af4dfa9dd62abe8577b6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"superadmins",
+								"6283af4dfa9dd62abe8577b6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Super Admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/superadmins/62825151c2380439abdfa149",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"superadmins",
+								"62825151c2380439abdfa149"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Super Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"juan\",\r\n    \"lastName\":\"miller\",\r\n    \"email\":\"juanmiller@gmail.com\",\r\n    \"password\" :\"qweqwe123123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/superadmins/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"superadmins",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "TimeSheets",
@@ -25,7 +134,7 @@
 			"name": "Tasks",
 			"item": []
 		},
-        {
+		{
 			"name": "Projects",
 			"item": []
 		}
