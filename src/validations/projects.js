@@ -17,11 +17,9 @@ const validateProject = (req, res, next) => {
 
     employeeID: Joi.string().required(),
 
-    role: Joi.string().min(2).required(),
-    enum: ['QA', 'DEV', 'TL', 'PM'],
+    role: Joi.string().min(2).valid('QA', 'DEV', 'TL', 'PM').required(),
 
-    state: Joi.string().min(3).required(),
-    enum: ['finished', 'started'],
+    state: Joi.string().min(3).valid('finished', 'started').required(),
   });
 
   const validation = schema.validate(req.body);
