@@ -7,9 +7,7 @@ import router from './routes';
 const mongoDBURL = 'mongodb+srv://BaSP:BaSP2022@cluster0.caoft.mongodb.net/BaSP-database?appName=mongosh+1.3.1';
 
 mongoose.connect(mongoDBURL, () => {
-  // eslint-disable-next-line no-console
   console.log('Connected to the database');
-// eslint-disable-next-line no-console
 }, (error) => console.log(`Failed to connect to the database ${error}`));
 
 const app = express();
