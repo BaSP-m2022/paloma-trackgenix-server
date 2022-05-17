@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 import Joi from 'joi';
 
 const validateProject = (req, res, next) => {
@@ -17,15 +18,17 @@ const validateProject = (req, res, next) => {
     employeeID: Joi.string().required(),
 
     role: Joi.string().min(2).required(),
+    enum: ['QA', 'DEV', 'TL', 'PM'],
 
     state: Joi.string().min(3).required(),
+    enum: ['finished', 'started'],
   });
 
   const validation = schema.validate(req.body);
 
   if (validation.error) {
     return res.status(400).json({
-      message: 'Erros in the request',
+      message: 'Error in the request',
       error: validation.error.details[0].message,
     });
   }
