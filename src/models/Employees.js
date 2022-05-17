@@ -1,4 +1,3 @@
-import { string } from 'joi';
 import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
@@ -8,8 +7,11 @@ const employee = new Schema({
   lastName: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  assignedRole: { type: string, required: true },
-  assignedTask: { type: string, required: true },
+  assignedRole: { type: String, required: true },
+  assignedTask: { type: String, required: true },
+}, {
+  collection: 'Employees',
+  versionkey: false,
 });
 
-export default employee;
+export default mongoose.model('employee', employee);
