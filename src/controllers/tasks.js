@@ -1,46 +1,133 @@
-const express = require('express');
-const fs = require('fs');
-const tasks = require('../data/tasks.json');
+// import models from '../models';
 
-import models from '../models';
+const models = require('../models');
 
-const router = express.Router();
+// const express = require('express');
+
+// const router = express.Router();
 
 const getAllTasks = async (req, res) => {
-  const allTasks = await models.Tasks.find({});
-  return res.status(200).json(allTasks);
-}
+  try {
+    const allTasks = await models.Tasks.find({});
+    return res.status(200).json(allTasks);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      msg: 'Error',
+    });
+  }
+};
 
 const getTaskByID = async (req, res) => {
-  if (req.params.id){
+  if (req.params.id) {
     const task = await models.Tasks.findByID(req.params.id);
     return res.status(200).json(task);
   }
-
-  else{
-    return res.status(400).json({
-      msg: 'Missing id parameter'
-    })
-  }
-  
-}
+  return res.status(400).json({
+    msg: 'Missing id parameter',
+  });
+};
 
 const createTask = async (req, res) => {
-  const task = new models.Task({
-    taskID: req.params.taskID,
-    taskName: req.params.taskName,
-    taskDescription: req.params.taskDescription,
-    status: req.params.status,
-    employeeID: req.params.employeeID
-  });
-
-  const result = await task.save();
-  return res.status(201).json(result);
-}
+  try {
+    const task = new models.Task({
+      taskID: req.params.taskID,
+      taskName: req.params.taskName,
+      taskDescription: req.params.taskDescription,
+      status: req.params.status,
+      employeeID: req.params.employeeID,
+    });
+    const result = await task.save();
+    return res.status(201).json(result);
+  } catch (error) {
+    return res.json({
+      msg: 'There was an error creating the task',
+      error: error.details[0].message,
+    });
+  }
+};
 
 const deleteTask = async (req, res) => {
+  try {
+    if (!req.params.id) {
+      return res.status(400).json({
+        msg: 'missing id parameter',
+      });
+    }
+    const result = await models.Tasks.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({
+        msg: 'The task has not been found',
+      });
+    }
+    return res.status(200).json({
+      msg: 'Task Deleted!',
+    });
+  } catch (error) {
+    return res.json({
+      msg: 'An error has ocurred',
+    });
+  }
+};
 
-}
+const updateTask = async (req, res) => {
+  try {
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing id parameter',
+      });
+    }
+    const result = await models.Tasks.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
+    );
+    if (!result) {
+      return res.status(404).json({
+        message: 'The task has not been found',
+      });
+    }
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.json({
+      message: 'An error occurred',
+      error: error.details[0].message,
+    });
+  }
+};
+
+const getTaskByName = async (req, res) => {
+  if (req.params.taskName) {
+    const task = await models.Tasks.findByID(req.params.taskName);
+    return res.status(200).json(task);
+  }
+
+  return res.status(400).json({
+    msg: 'Missing task name parameter',
+  });
+};
+
+const getTaskByStatus = async (req, res) => {
+  if (req.params.status) {
+    const task = await models.Tasks.findByID(req.params.status);
+    return res.status(200).json(task);
+  }
+
+  return res.status(400).json({
+    msg: 'Missing status parameter',
+  });
+};
+
+const getTaskByEmployeeID = async (req, res) => {
+  if (req.params.employeeID) {
+    const task = await models.Tasks.findByID(req.params.employeeID);
+    return res.status(200).json(task);
+  }
+
+  return res.status(400).json({
+    msg: 'Missing employee id parameter',
+  });
+};
 
 // router.get('/', (req, res) => {
 //   res.send(tasks);
@@ -138,4 +225,13 @@ const deleteTask = async (req, res) => {
 //   }
 // });
 
-module.exports = router;
+module.exports = {
+  getAllTasks,
+  getTaskByID,
+  createTask,
+  deleteTask,
+  updateTask,
+  getTaskByEmployeeID,
+  getTaskByStatus,
+  getTaskByName,
+};

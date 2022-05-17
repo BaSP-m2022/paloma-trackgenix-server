@@ -1,11 +1,11 @@
 import express from 'express';
-import tasks from '../controllers/tasks';
-import tasks from '../validations/tasks';
+import tasksController from '../controllers/tasks';
+import tasksValidations from '../validations/tasks';
 
 const router = express.Router();
 
 router
-
-
+  .get('/', tasksController.getAllTasks)
+  .post('/', tasksValidations.validateTasks, tasksController.createTask);
 
 export default router;

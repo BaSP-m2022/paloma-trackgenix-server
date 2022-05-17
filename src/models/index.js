@@ -1,5 +1,7 @@
-import Task from './Tasks'
+// import Task from './Tasks';
+
+const Tasks = require('./Tasks');
 
 module.exports = {
-    Task
-}
+  Tasks,
+};
