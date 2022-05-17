@@ -10,8 +10,8 @@ const projects = new Schema({
   finishDate: { type: Date, required: false },
   rate: { type: Number, required: true },
   employeeID: { type: String, required: true },
-  role: { type: String, required: true },
-  state: { type: String, required: true },
+  role: { type: String, enum: ['TI', 'QA', 'DEV'], required: true },
+  state: { type: String, enum: ['Started', 'Finished'], required: true },
 }, {
   collection: 'Projects',
   versionKey: false,
