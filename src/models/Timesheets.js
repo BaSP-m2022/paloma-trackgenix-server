@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
-
 const timeSheetSchema = new Schema(
   {
     name: { type: String, required: true },
