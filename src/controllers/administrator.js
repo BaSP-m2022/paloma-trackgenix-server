@@ -105,7 +105,7 @@ const deleteAdmin = async (req, res) => {
         error: true,
       });
     }
-    return res.status(204).json({
+    return res.status(200).json({
       msg: 'Deleted admin!',
       data: result,
       error: false,
