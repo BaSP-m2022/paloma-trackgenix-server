@@ -8,17 +8,26 @@ const getAllTasks = async (req, res) => {
     console.log(error);
     return res.status(500).json({
       msg: 'Error',
+      error: true,
     });
   }
 };
 
 const getTaskByID = async (req, res) => {
   if (req.params.id) {
-    const task = await Tasks.findById(req.params.id);
-    return res.status(200).json(task);
+    try {
+      const task = await Tasks.findById(req.params.id);
+      return res.status(200).json(task);
+    } catch (error) {
+      return res.status(404).json({
+        msg: 'The task has not been found',
+        error: true,
+      });
+    }
   }
   return res.status(400).json({
     msg: 'Missing id parameter',
+    error: true,
   });
 };
 
@@ -33,8 +42,9 @@ const createTask = async (req, res) => {
     const result = await task.save();
     return res.status(201).json(result);
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       msg: 'There was an error creating the task',
+      error: true,
     });
   }
 };
@@ -44,20 +54,24 @@ const deleteTask = async (req, res) => {
     if (!req.params.id) {
       return res.status(400).json({
         msg: 'missing id parameter',
+        error: true,
       });
     }
     const result = await Tasks.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
         msg: 'The task has not been found',
+        error: true,
       });
     }
     return res.status(200).json({
       msg: 'Task Deleted!',
+      error: false,
     });
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       msg: 'An error has ocurred',
+      error: true,
     });
   }
 };
@@ -67,6 +81,7 @@ const updateTask = async (req, res) => {
     if (!req.params) {
       return res.status(400).json({
         message: 'Missing id parameter',
+        error: true,
       });
     }
     const result = await Tasks.findByIdAndUpdate(
@@ -77,13 +92,14 @@ const updateTask = async (req, res) => {
     if (!result) {
       return res.status(404).json({
         message: 'The task has not been found',
+        error: true,
       });
     }
     return res.status(200).json(result);
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       message: 'An error occurred',
-      error: error.details[0].message,
+      error: true,
     });
   }
 };
