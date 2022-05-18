@@ -18,11 +18,11 @@ const getTimeSheetsById = async (req, res) => {
       const timeSheet = await Timesheets.findById(req.params.id);
       return res.status(200).json(timeSheet);
     }
-    return res.status(400).json({
+    return res.status(404).json({
       msg: 'Missing id parameter',
     });
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       msg: error,
     });
   }
@@ -45,7 +45,7 @@ const createTimesheet = async (req, res) => {
     const result = await newTimeSheet.save();
     return res.status(201).json({ data: result, error: false });
   } catch (err) {
-    return res.status().json({ message: 'There was an error saving the TimeSheet', err, error: true });
+    return res.status(500).json({ message: 'There was an error saving the TimeSheet', err, error: true });
   }
 };
 
@@ -69,7 +69,7 @@ const editTimesheet = async (req, res) => {
     return res.status(200).json(result);
   } catch (error) {
     console.log(error);
-    return res.json({
+    return res.status(500).json({
       message: 'An error occurred',
       error: error.details[0].message,
     });
@@ -93,7 +93,7 @@ const deleteTimeSheet = async (req, res) => {
       msg: 'Deleted!',
     });
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       msg: 'An error has ocurred',
     });
   }

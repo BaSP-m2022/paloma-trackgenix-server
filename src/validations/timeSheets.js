@@ -4,7 +4,7 @@ const validateTimesheet = (req, res, next) => {
   const timesheetValidation = Joi.object({
     name: Joi.string().min(3).required(),
     surName: Joi.string().min(3).required(),
-    role: Joi.string().min(2).required(),
+    role: Joi.string().valid('QA', 'PM', 'DEV').min(2).required(),
     startDate: Joi.date().required(),
     finishDate: Joi.date().required(),
     regularHours: Joi.number().min(1).required(),
