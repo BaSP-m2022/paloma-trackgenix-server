@@ -14,16 +14,23 @@ const getAllTimeSheets = async (req, res) => {
 
 const getTimeSheetsById = async (req, res) => {
   try {
-    if (req.params.id) {
-      const timeSheet = await Timesheets.findById(req.params.id);
-      return res.status(200).json(timeSheet);
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing id parameter',
+      });
     }
-    return res.status(404).json({
-      msg: 'Missing id parameter',
-    });
+    const timeSheet = await Timesheets.findById(req.params.id);
+    if (!timeSheet) {
+      return res.status(404).json({
+        message: 'The timesheet has not been found',
+      });
+    }
+    return res.status(200).json(timeSheet);
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
-      msg: error,
+      message: 'An error occurred',
+      error: error.details[0].message,
     });
   }
 };
