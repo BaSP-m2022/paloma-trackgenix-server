@@ -5,7 +5,6 @@ const getAllProjects = async (req, res) => {
     const allProjects = await Projects.find({});
     return res.status(200).json(allProjects);
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       msg: 'Error',
     });
@@ -14,15 +13,20 @@ const getAllProjects = async (req, res) => {
 
 const getProjectsById = async (req, res) => {
   try {
-    if (req.params.id) {
-      const project = await Projects.findById(req.params.id);
-      return res.status(200).json(project);
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing an ID parameter',
+      });
     }
-    return res.status(400).json({
-      msg: 'Missing id parameter',
-    });
+    const project = await Projects.findById(req.params.id);
+    if (!project) {
+      return res.status(404).json({
+        message: 'The project was not found',
+      });
+    }
+    return res.status(200).json(project);
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       msg: 'Error',
     });
   }
@@ -44,7 +48,7 @@ const createProject = async (req, res) => {
     const result = await project.save();
     return res.status(201).json(result);
   } catch (error) {
-    return res.json({ message: 'There was an error saving the project' });
+    return res.status(500).json({ message: 'There was an error saving the project' });
   }
 };
 
@@ -65,7 +69,7 @@ const deleteProject = async (req, res) => {
       msg: 'Deleted!',
     });
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       msg: 'An error has ocurred',
     });
   }
@@ -90,7 +94,7 @@ const editProject = async (req, res) => {
     }
     return res.status(200).json(result);
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       message: 'An error occurred',
       error: error.details[0].message,
     });
