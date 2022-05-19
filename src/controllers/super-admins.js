@@ -1,4 +1,3 @@
-
 import SuperAdmin from '../models/Superadmin';
 
 // Get all the super admin
@@ -109,4 +108,3 @@ const deleteSuperAdm = async (req, res) => {
 export default {
   createSuperAdmin, getAllSuperAdmins, getSuperAdmById, deleteSuperAdm, editSuperAdmin,
 };
-
