@@ -1,13 +1,12 @@
 import express from 'express';
+import superAdminRoutes from './superAdmin';
+import timeSheets from './timeSheets';
 import Tasks from './tasks';
 
 const router = express.Router();
+
 router.use('/tasks', Tasks);
 
-import timeSheets from './timeSheets';
-
-const router = express.Router();
-
-router.use('/timesheets', timeSheets);
+router.use('/superadmins', superAdminRoutes);
 
 export default router;
