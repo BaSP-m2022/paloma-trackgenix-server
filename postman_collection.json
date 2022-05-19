@@ -71,7 +71,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastName\": \"Lorenzi\",\r\n  \"email\": \"asdasd@adfsdas\",\r\n  \"password\": \"asdasd\",\r\n  \"assignedRole\": \"asd\",\r\n  \"assignedTask\": \"asdd\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastname\": \"Lorenzi\",\r\n  \"email\": \"asdasd@adfsdas\",\r\n  \"password\": \"asdasd\",\r\n  \"assignedRole\": \"asd\",\r\n  \"assignedTask\": \"asdd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -99,7 +99,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastName\": \"Lorenzi\",\r\n  \"email\": \"asdasd@adfsdas\",\r\n  \"password\": \"asdasd\",\r\n  \"assignedRole\": \"asd\",\r\n  \"assignedTask\": \"asdd\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastname\": \"Lorenzi\",\r\n  \"email\": \"asdasd@adfsdas\",\r\n  \"password\": \"asdasd\",\r\n  \"assignedRole\": \"asd\",\r\n  \"assignedTask\": \"asdd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -127,7 +127,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastName\": \"Lorenzi\",\r\n  \"email\": \"asdasd@adfsdas\",\r\n  \"password\": \"asdasd\",\r\n  \"assignedRole\": \"asd\",\r\n  \"assignedTask\": \"asdd\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastname\": \"Lorenzi\",\r\n  \"email\": \"asdasd@adfsdas\",\r\n  \"password\": \"asdasd\",\r\n  \"assignedRole\": \"asd\",\r\n  \"assignedTask\": \"asdd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -154,7 +154,6 @@
 			"name": "Tasks",
 			"item": []
 		},
-    {
 		{
 			"name": "Projects",
 			"item": []

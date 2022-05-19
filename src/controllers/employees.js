@@ -14,18 +14,23 @@ const getAllEmployees = async (req, res) => {
     });
   }
 };
-
 const getEmployeesById = async (req, res) => {
   try {
-    if (req.params.id) {
-      const employee = await Employees.findById(req.params.id);
-      return res.status(200).json(employee);
-    } return res.status(400).json({
-      message: 'There is no such Id',
-    });
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing an ID parameter',
+      });
+    }
+    const employee = await Employees.findById(req.params.id);
+    if (!employee) {
+      return res.status(404).json({
+        message: 'The employee was not found',
+      });
+    }
+    return res.status(200).json(employee);
   } catch (error) {
-    return res.json({
-      message: 'Error',
+    return res.status(500).json({
+      msg: 'Error',
     });
   }
 };
@@ -45,13 +50,13 @@ const createEmployees = async (req, res) => {
     return res.status(201).json(result);
   } catch (error) {
     console.log(error);
-    return res.json({ message: 'There was an error saving the employee' });
+    return res.status(500).json({ message: 'There was an error saving the employee' });
   }
 };
 
 const updateEmployee = async (req, res) => {
   try {
-    if (!req.params) {
+    if (!req.params.id) {
       return res.status(400).json({
         message: 'Missing id parameter',
       });
@@ -68,12 +73,14 @@ const updateEmployee = async (req, res) => {
     }
     return res.status(200).json(result);
   } catch (error) {
-    return res.json({
+    console.log(error);
+    return res.status(500).json({
       message: 'An error occurred',
       error: error.details[0].message,
     });
   }
 };
+
 const deleteEmployee = async (req, res) => {
   try {
     if (!req.params.id) {
@@ -91,7 +98,7 @@ const deleteEmployee = async (req, res) => {
       msg: 'Employee succesfully Deleted!',
     });
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       msg: 'An error has ocurred',
     });
   }
