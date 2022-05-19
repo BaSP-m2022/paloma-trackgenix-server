@@ -7,9 +7,122 @@
 	"item": [
 		{
 			"name": "Admins",
-			"item": []
+			"item": [
+				{
+					"name": "Create Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n    {\r\n        \"name\": \"prueba\",\r\n        \"lastName\": \"prueba\",\r\n        \"email\": \"prueba@mail.com\",\r\n        \"gender\": \"male\",\r\n        \"active\": false\r\n    }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/admin/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/admin",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Admin by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/admin/6282645e2efb46ffc26117b6",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								"6282645e2efb46ffc26117b6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Damian\",\r\n    \"lastName\": \"Lopez\",\r\n    \"email\": \"dlopez@mail.com\",\r\n    \"gender\": \"male\",\r\n    \"active\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/admin/62825d854d1720f72dbeea65",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								"62825d854d1720f72dbeea65"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/admin/6282651edef755870b4d6c86",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"admin",
+								"6282651edef755870b4d6c86"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
-		{
+        {
 			"name": "SuperAdmin",
 			"item": [
 				{
@@ -122,19 +235,8 @@
 				}
 			]
 		},
-		{
+        {
 			"name": "TimeSheets",
-			"item": []
-		},
-		{
-			"name": "Employees",
-			"item": []
-		},
-		{
-			"name": "Tasks",
-			"item": [
-				{
-					"name": "get",
 			"item": [
 				{
 					"name": "GetAll",
@@ -142,7 +244,6 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/tasks",
 							"raw": "http://localhost:3000/timesheets",
 							"protocol": "http",
 							"host": [
@@ -150,7 +251,6 @@
 							],
 							"port": "3000",
 							"path": [
-								"tasks"
 								"timesheets"
 							]
 						}
@@ -158,13 +258,11 @@
 					"response": []
 				},
 				{
-					"name": "getById",
 					"name": "GetByID",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/tasks/6283fef5bbe2a1f49354961e",
 							"raw": "http://localhost:3000/timesheets/6283f1ed32c067e716f0fa97",
 							"protocol": "http",
 							"host": [
@@ -192,8 +290,6 @@
 							],
 							"port": "3000",
 							"path": [
-								"tasks",
-								"6283fef5bbe2a1f49354961e"
 								"timesheets"
 							]
 						}
@@ -201,14 +297,12 @@
 					"response": []
 				},
 				{
-					"name": "post",
 					"name": "Create",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"taskName\": \"Use of CSS in HTML\",\r\n    \"taskDescription\": \"Use CSS to stylish the page\",\r\n    \"status\": \"Finished\",\r\n    \"employeeID\": \"2\"\r\n}",
 							"raw": "{\r\n    \"name\": \"leonel\",\r\n    \"surName\": \"listro\",\r\n    \"role\": \"DEV\",\r\n    \"startDate\": \"05/15/2020\",\r\n    \"finishDate\": \"05/16/2022\",\r\n    \"regularHours\": \"200\",\r\n    \"overtimeHours\": \"50\",\r\n    \"rate\": \"2500\",\r\n    \"project\": \"project 1\",\r\n    \"task\": \"development\"\r\n}",
 							"options": {
 								"raw": {
@@ -217,7 +311,6 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/tasks",
 							"raw": "http://localhost:3000/timesheets/",
 							"protocol": "http",
 							"host": [
@@ -225,7 +318,6 @@
 							],
 							"port": "3000",
 							"path": [
-								"tasks"
 								"timesheets",
 								""
 							]
@@ -234,13 +326,6 @@
 					"response": []
 				},
 				{
-					"name": "put",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"taskName\": \"Creation of JavaScript\",\r\n    \"taskDescription\": \"Use of JavaScript to give functionality to the page\"\r\n}",
 					"name": "Edit",
 					"request": {
 						"method": "PUT",
@@ -250,7 +335,7 @@
 				}
 			]
 		},
-		{
+        {
 			"name": "Employees",
 			"item": [
 				{
@@ -312,8 +397,6 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/tasks/6283fef5bbe2a1f49354961e",
-							"protocol": "http",
 							"raw": "localhost:3000/Employees/",
 							"host": [
 								"localhost"
@@ -348,8 +431,6 @@
 							],
 							"port": "3000",
 							"path": [
-								"tasks",
-								"6283fef5bbe2a1f49354961e"
 								"Employees",
 								"2"
 							]
@@ -358,13 +439,6 @@
 					"response": []
 				},
 				{
-					"name": "delete",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/tasks/628400d28a714bce42807c97",
-							"protocol": "http",
 					"name": "Delete EmployeeById",
 					"request": {
 						"method": "DELETE",
@@ -385,8 +459,6 @@
 							],
 							"port": "3000",
 							"path": [
-								"tasks",
-								"628400d28a714bce42807c97"
 								"Employees",
 								"2"
 							]
@@ -396,9 +468,126 @@
 				}
 			]
 		},
-		{
-			"name": "Projects",
-			"item": []
+        {
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks/6283fef5bbe2a1f49354961e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks",
+								"6283fef5bbe2a1f49354961e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"taskName\": \"Use of CSS in HTML\",\r\n    \"taskDescription\": \"Use CSS to stylish the page\",\r\n    \"status\": \"Finished\",\r\n    \"employeeID\": \"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"taskName\": \"Creation of JavaScript\",\r\n    \"taskDescription\": \"Use of JavaScript to give functionality to the page\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/tasks/6283fef5bbe2a1f49354961e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks",
+								"6283fef5bbe2a1f49354961e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks/628400d28a714bce42807c97",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks",
+								"628400d28a714bce42807c97"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
         {
             "name":"Projects",
@@ -521,5 +710,5 @@
                 }
             ]
         }
-	]
+    ]
 }
