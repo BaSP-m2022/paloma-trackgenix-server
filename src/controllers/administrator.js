@@ -76,7 +76,7 @@ const createAdmin = async (req, res) => {
 
 const editAdmin = async (req, res) => {
   try {
-    if (req.params.id === '') {
+    if (!req.params.id) {
       return res.status(404).json({
         message: 'Missing id parameter',
         data: undefined,
