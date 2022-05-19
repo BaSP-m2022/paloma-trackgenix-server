@@ -124,6 +124,17 @@
 		},
 		{
 			"name": "TimeSheets",
+			"item": []
+		},
+		{
+			"name": "Employees",
+			"item": []
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "get",
 			"item": [
 				{
 					"name": "GetAll",
@@ -131,6 +142,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
+							"raw": "http://localhost:3000/tasks",
 							"raw": "http://localhost:3000/timesheets",
 							"protocol": "http",
 							"host": [
@@ -138,6 +150,7 @@
 							],
 							"port": "3000",
 							"path": [
+								"tasks"
 								"timesheets"
 							]
 						}
@@ -145,11 +158,13 @@
 					"response": []
 				},
 				{
+					"name": "getById",
 					"name": "GetByID",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
+							"raw": "http://localhost:3000/tasks/6283fef5bbe2a1f49354961e",
 							"raw": "http://localhost:3000/timesheets/6283f1ed32c067e716f0fa97",
 							"protocol": "http",
 							"host": [
@@ -177,6 +192,8 @@
 							],
 							"port": "3000",
 							"path": [
+								"tasks",
+								"6283fef5bbe2a1f49354961e"
 								"timesheets"
 							]
 						}
@@ -184,12 +201,14 @@
 					"response": []
 				},
 				{
+					"name": "post",
 					"name": "Create",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
+							"raw": "{\r\n    \"taskName\": \"Use of CSS in HTML\",\r\n    \"taskDescription\": \"Use CSS to stylish the page\",\r\n    \"status\": \"Finished\",\r\n    \"employeeID\": \"2\"\r\n}",
 							"raw": "{\r\n    \"name\": \"leonel\",\r\n    \"surName\": \"listro\",\r\n    \"role\": \"DEV\",\r\n    \"startDate\": \"05/15/2020\",\r\n    \"finishDate\": \"05/16/2022\",\r\n    \"regularHours\": \"200\",\r\n    \"overtimeHours\": \"50\",\r\n    \"rate\": \"2500\",\r\n    \"project\": \"project 1\",\r\n    \"task\": \"development\"\r\n}",
 							"options": {
 								"raw": {
@@ -198,6 +217,7 @@
 							}
 						},
 						"url": {
+							"raw": "http://localhost:3000/tasks",
 							"raw": "http://localhost:3000/timesheets/",
 							"protocol": "http",
 							"host": [
@@ -205,6 +225,7 @@
 							],
 							"port": "3000",
 							"path": [
+								"tasks"
 								"timesheets",
 								""
 							]
@@ -213,6 +234,13 @@
 					"response": []
 				},
 				{
+					"name": "put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"taskName\": \"Creation of JavaScript\",\r\n    \"taskDescription\": \"Use of JavaScript to give functionality to the page\"\r\n}",
 					"name": "Edit",
 					"request": {
 						"method": "PUT",
@@ -284,6 +312,8 @@
 							}
 						},
 						"url": {
+							"raw": "http://localhost:3000/tasks/6283fef5bbe2a1f49354961e",
+							"protocol": "http",
 							"raw": "localhost:3000/Employees/",
 							"host": [
 								"localhost"
@@ -318,6 +348,8 @@
 							],
 							"port": "3000",
 							"path": [
+								"tasks",
+								"6283fef5bbe2a1f49354961e"
 								"Employees",
 								"2"
 							]
@@ -326,6 +358,13 @@
 					"response": []
 				},
 				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks/628400d28a714bce42807c97",
+							"protocol": "http",
 					"name": "Delete EmployeeById",
 					"request": {
 						"method": "DELETE",
@@ -346,6 +385,8 @@
 							],
 							"port": "3000",
 							"path": [
+								"tasks",
+								"628400d28a714bce42807c97"
 								"Employees",
 								"2"
 							]
@@ -354,10 +395,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "Tasks",
-			"item": []
 		},
 		{
 			"name": "Projects",
