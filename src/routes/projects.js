@@ -9,4 +9,5 @@ router.get('/:id', projectsController.getProjectsById);
 router.post('/', validator.validateProject, projectsController.createProject);
 router.delete('/:id', projectsController.deleteProject);
 router.put('/:id', validator.validateProject, projectsController.editProject);
+
 export default router;
