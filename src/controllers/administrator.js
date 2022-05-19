@@ -6,7 +6,7 @@ const getAllAdmins = async (req, res) => {
     const allAdmins = await Admin.find({});
     return res.status(200).json(allAdmins);
   } catch (error) {
-    res.json({
+    res.status(500).json({
       message: 'There was an error getting all admins',
       data: {},
       error: true,
@@ -18,15 +18,22 @@ const getAdminById = async (req, res) => {
   try {
     if (req.params.id) {
       const admin = await Admin.findById(req.params.id);
-      return res.status(200).json(admin);
+      if (admin) {
+        return res.status(200).json(admin);
+      }
+      return res.status(404).json({
+        message: 'ID not found',
+        data: undefined,
+        error: true,
+      });
     }
-    return res.status(400).json({
+    return res.status(404).json({
       message: 'Missing Id parameter',
       data: {},
       error: true,
     });
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       message: 'There was an error getting an admin by id',
       data: {},
       error: true,
@@ -59,7 +66,7 @@ const createAdmin = async (req, res) => {
       });
     });
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       message: 'There was an error creating admin',
       data: undefined,
       error: true,
@@ -69,8 +76,8 @@ const createAdmin = async (req, res) => {
 
 const editAdmin = async (req, res) => {
   try {
-    if (!req.params) {
-      return res.status(400).json({
+    if (req.params.id === '') {
+      return res.status(404).json({
         message: 'Missing id parameter',
         data: undefined,
         error: true,
@@ -84,13 +91,15 @@ const editAdmin = async (req, res) => {
     if (!result) {
       return res.status(404).json({
         message: 'The admin was not found',
+        data: undefined,
+        error: true,
       });
     }
     return res.status(200).json(result);
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       message: 'There was an error editing the admin',
-      error: error.details[0].message,
+      error: true,
     });
   }
 };
@@ -111,7 +120,7 @@ const deleteAdmin = async (req, res) => {
       error: false,
     });
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       msg: 'There was an error deleting the admin',
       error: true,
     });
