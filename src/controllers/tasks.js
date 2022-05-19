@@ -1,103 +1,113 @@
-const express = require('express');
-const fs = require('fs');
-const tasks = require('../data/tasks.json');
+import Tasks from '../models/Tasks';
 
-const router = express.Router();
-
-router.get('/', (req, res) => {
-  res.send(tasks);
-});
-
-router.get('/:taskID', (req, res) => {
-  const findTask = req.params.taskID;
-  const taskFound = tasks.find((task) => task.taskID === findTask);
-  if (taskFound) {
-    res.send(taskFound);
-  } else {
-    res.send('Task not found');
-  }
-});
-
-router.get('/taskName/:taskName', (req, res) => {
-  const nameTask = req.params.taskName;
-  const taskNamed = tasks.filter((task) => task.taskName === nameTask);
-  if (taskNamed.length > 0) {
-    res.send(taskNamed);
-  } else {
-    res.send(`There is no task with "${nameTask}" name`);
-  }
-});
-
-router.get('/status/:status', (req, res) => {
-  const taskStatus = req.params.status;
-  const statusOfTask = tasks.filter((task) => task.status === taskStatus);
-  if (statusOfTask.length > 0) {
-    res.send(statusOfTask);
-  } else {
-    res.send(`There is no task with "${taskStatus}" status`);
-  }
-});
-
-router.get('/employee/:employeeID', (req, res) => {
-  const emplId = req.params.employeeID;
-  const idOfEmployee = tasks.filter((task) => task.employeeID === emplId);
-  if (idOfEmployee.length > 0) {
-    res.send(idOfEmployee);
-  } else {
-    res.send(`There is no employee with ID number "${emplId}"`);
-  }
-});
-
-router.post('/', (req, res) => {
-  const taskData = req.body;
-  const taskFound = tasks.find((task) => task.taskID === taskData.taskID);
-  if (taskData.taskID && taskData.taskName && taskData.taskDescription
-    && taskData.status && taskData.employeeID && !taskFound) {
-    tasks.push(taskData);
-    fs.writeFile('src/data/tasks.json', JSON.stringify(tasks), (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send('Task created');
-      }
-    });
-  } else {
-    res.send('Fields are not properly complete');
-  }
-});
-
-router.delete('/:taskID', (req, res) => {
-  const tasksId = req.params.taskID;
-  const idOfTasks = tasks.filter((task) => task.taskID !== tasksId);
-  if (tasks.length === idOfTasks.length) {
-    res.send('This task could not be found');
-  } else {
-    fs.writeFile('src/data/tasks.json', JSON.stringify(idOfTasks), (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send('Task deleted');
-      }
+const getAllTasks = async (req, res) => {
+  try {
+    const allTasks = await Tasks.find({});
+    return res.status(200).json(allTasks);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      msg: 'Error',
+      error: true,
     });
   }
-});
+};
 
-router.put('/:taskID', (req, res) => {
-  let tasksId = req.params.taskID;
-  const jsonData = fs.readFileSync('src/data/tasks.json');
-  const data = JSON.parse(jsonData);
-  const filterTasks = tasks.find((task) => task.taskID === tasksId);
-  if (filterTasks) {
-    tasksId -= 1;
-    data[tasksId].taskName = req.body.taskName;
-    data[tasksId].taskDescription = req.body.taskDescription;
-    data[tasksId].status = req.body.status;
-    data[tasksId].employeeID = req.body.employeeID;
-    fs.writeFileSync('src/data/tasks.json', JSON.stringify(data));
-    res.json(data);
-  } else {
-    res.send('Task not found');
+const getTaskByID = async (req, res) => {
+  if (req.params.id) {
+    try {
+      const task = await Tasks.findById(req.params.id);
+      return res.status(200).json(task);
+    } catch (error) {
+      return res.status(404).json({
+        msg: 'The task has not been found',
+        error: true,
+      });
+    }
   }
-});
+  return res.status(400).json({
+    msg: 'Missing id parameter',
+    error: true,
+  });
+};
 
-module.exports = router;
+const createTask = async (req, res) => {
+  try {
+    const task = new Tasks({
+      taskName: req.body.taskName,
+      taskDescription: req.body.taskDescription,
+      status: req.body.status,
+      employeeID: req.body.employeeID,
+    });
+    const result = await task.save();
+    return res.status(201).json(result);
+  } catch (error) {
+    return res.status(500).json({
+      msg: 'There was an error creating the task',
+      error: true,
+    });
+  }
+};
+
+const deleteTask = async (req, res) => {
+  try {
+    if (!req.params.id) {
+      return res.status(400).json({
+        msg: 'missing id parameter',
+        error: true,
+      });
+    }
+    const result = await Tasks.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({
+        msg: 'The task has not been found',
+        error: true,
+      });
+    }
+    return res.status(200).json({
+      msg: 'Task Deleted!',
+      error: false,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      msg: 'An error has ocurred',
+      error: true,
+    });
+  }
+};
+
+const updateTask = async (req, res) => {
+  try {
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing id parameter',
+        error: true,
+      });
+    }
+    const result = await Tasks.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
+    );
+    if (!result) {
+      return res.status(404).json({
+        message: 'The task has not been found',
+        error: true,
+      });
+    }
+    return res.status(200).json(result);
+  } catch (error) {
+    return res.status(500).json({
+      message: 'An error occurred',
+      error: true,
+    });
+  }
+};
+
+export default {
+  getAllTasks,
+  getTaskByID,
+  createTask,
+  deleteTask,
+  updateTask,
+};

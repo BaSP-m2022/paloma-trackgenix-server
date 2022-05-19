@@ -1,3 +1,4 @@
+
 import Projects from '../models/Projects';
 
 const getAllProjects = async (req, res) => {
@@ -103,3 +104,4 @@ export default {
   deleteProject,
   editProject,
 };
+

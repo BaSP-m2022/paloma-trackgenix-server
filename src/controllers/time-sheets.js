@@ -1,122 +1,115 @@
-const express = require('express');
-const fs = require('fs');
-const timesheets = require('../data/time-sheets.json');
+import Timesheets from '../models/Timesheets';
 
-const timesheetRouter = express.Router();
-
-timesheetRouter.get('/', (req, res) => {
-  res.send(timesheets);
-});
-
-timesheetRouter.get('/:id', (req, res) => {
-  const timesheetID = req.params.id;
-  const user = timesheets.find((timesheet) => timesheet.id === timesheetID);
-
-  if (user) {
-    res.send(user);
-  } else {
-    res.send(`Timesheet ${timesheetID} not found`);
-  }
-});
-
-timesheetRouter.get('/role/:role', (req, res) => {
-  const userRol = req.params.role;
-  const user = timesheets.filter((timesheet) => timesheet.role === userRol);
-
-  if (user.length > 0) {
-    res.send(user);
-  } else {
-    res.send(`Users with ${userRol} rol not found`);
-  }
-});
-
-timesheetRouter.get('/project/:project', (req, res) => {
-  const { project } = req.params;
-  const allProject = timesheets.filter((timesheet) => timesheet.project === project);
-
-  if (allProject.length > 0) {
-    res.send(allProject);
-  } else {
-    res.send(`Project ${project} not found`);
-  }
-});
-
-timesheetRouter.get('/employee/:employeeID', (req, res) => {
-  const employee = req.params.employeeID;
-  const filterID = timesheets.find((timesheet) => timesheet.employeeID === employee);
-
-  if (filterID) {
-    res.send(filterID);
-  } else {
-    res.send(`User ${employee} not found`);
-  }
-});
-
-timesheetRouter.post('/', (req, res) => {
-  const timesheetData = req.body;
-  const filterID = timesheets.find((timesheet) => timesheet.id === timesheetData.id);
-  timesheets.push(timesheetData);
-  if (timesheetData.employeeID && timesheetData.id && timesheetData.name && timesheetData.surname
-    && timesheetData.role && timesheetData.startDate && timesheetData.finishDate
-    && timesheetData.regularHours && timesheetData.overtimeHours
-    && timesheetData.rate && timesheetData.project && timesheetData.task && !filterID) {
-    fs.writeFile('./src/data/time-sheets.json', JSON.stringify(timesheets), (err) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send('Timesheet added');
-      }
+const getAllTimeSheets = async (req, res) => {
+  try {
+    const allTimeSheets = await Timesheets.find({});
+    return res.status(200).json(allTimeSheets);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      msg: 'Error',
     });
-  } else {
-    res.send('Incorrect data');
   }
-});
+};
 
-timesheetRouter.delete('/:id', (req, res) => {
-  const timesheetID = req.params.id;
-  const filteredID = timesheets.filter(
-    (ts) => ts.id !== timesheetID,
-  );
-  if (timesheets.length === filteredID.length) {
-    res.send(`Timsheet ${timesheetID} not found`);
-  } else {
-    fs.writeFile(
-      'src/data/time-sheets.json',
-      JSON.stringify(filteredID),
-      (err) => {
-        if (err) {
-          res.send(err);
-        } else {
-          res.send('timesheet deleted');
-        }
-      },
+const getTimeSheetsById = async (req, res) => {
+  try {
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing id parameter',
+      });
+    }
+    const timeSheet = await Timesheets.findById(req.params.id);
+    if (!timeSheet) {
+      return res.status(404).json({
+        message: 'The timesheet has not been found',
+      });
+    }
+    return res.status(200).json(timeSheet);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'An error occurred',
+      error: error.details[0].message,
+    });
+  }
+};
+
+const createTimesheet = async (req, res) => {
+  try {
+    const newTimeSheet = new Timesheets({
+      name: req.body.name,
+      surName: req.body.surName,
+      role: req.body.role,
+      startDate: req.body.startDate,
+      finishDate: req.body.finishDate,
+      regularHours: req.body.regularHours,
+      overtimeHours: req.body.overtimeHours,
+      rate: req.body.rate,
+      project: req.body.project,
+      task: req.body.task,
+    });
+    const result = await newTimeSheet.save();
+    return res.status(201).json({ data: result, error: false });
+  } catch (err) {
+    return res.status(500).json({ message: 'There was an error saving the TimeSheet', err, error: true });
+  }
+};
+
+const editTimesheet = async (req, res) => {
+  try {
+    if (!req.params) {
+      return res.status(400).json({
+        message: 'Missing id parameter',
+      });
+    }
+    const result = await Timesheets.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true },
     );
+    if (!result) {
+      return res.status(404).json({
+        message: 'The timesheet has not been found',
+      });
+    }
+    return res.status(200).json(result);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: 'An error occurred',
+      error: error.details[0].message,
+    });
   }
-});
+};
 
-timesheetRouter.put('/edit/:id', (req, res) => {
-  let userID = req.params.id;
-  const jsonData = fs.readFileSync('src/data/time-sheets.json');
-  const data = JSON.parse(jsonData);
-  const filterID = timesheets.find((timesheet) => timesheet.id === userID);
-  if (filterID) {
-    userID -= 1;
-    data[userID].employeeID = req.body.employeeID;
-    data[userID].name = req.body.name;
-    data[userID].surname = req.body.surname;
-    data[userID].role = req.body.role;
-    data[userID].startDate = req.body.startDate;
-    data[userID].finishDate = req.body.finishDate;
-    data[userID].regularHours = req.body.regularHours;
-    data[userID].overtimeHours = req.body.overtimeHours;
-    data[userID].rate = req.body.rate;
-    data[userID].project = req.body.project;
-    data[userID].task = req.body.task;
-    fs.writeFileSync('src/data/time-sheets.json', JSON.stringify(data));
-    res.json(data);
-  } else {
-    res.send('User not found');
+const deleteTimeSheet = async (req, res) => {
+  try {
+    if (!req.params.id) {
+      return res.status(400).json({
+        msg: 'missing id parameter',
+      });
+    }
+    const result = await Timesheets.findByIdAndDelete(req.params.id);
+    if (!result) {
+      return res.status(404).json({
+        msg: 'The timesheet has not been found',
+      });
+    }
+    return res.status(200).json({
+      msg: 'Deleted!',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      msg: 'An error has ocurred',
+    });
   }
-});
+};
 
-module.exports = timesheetRouter;
+export default {
+  getAllTimeSheets,
+  getTimeSheetsById,
+  createTimesheet,
+  editTimesheet,
+  deleteTimeSheet,
+};
