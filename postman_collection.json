@@ -122,7 +122,7 @@
 				}
 			]
 		},
-		{
+        {
 			"name": "SuperAdmin",
 			"item": [
 				{
@@ -235,19 +235,8 @@
 				}
 			]
 		},
-		{
+        {
 			"name": "TimeSheets",
-			"item": []
-		},
-		{
-			"name": "Employees",
-			"item": []
-		},
-		{
-			"name": "Tasks",
-			"item": [
-				{
-					"name": "get",
 			"item": [
 				{
 					"name": "GetAll",
@@ -255,7 +244,6 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/tasks",
 							"raw": "http://localhost:3000/timesheets",
 							"protocol": "http",
 							"host": [
@@ -263,7 +251,6 @@
 							],
 							"port": "3000",
 							"path": [
-								"tasks"
 								"timesheets"
 							]
 						}
@@ -271,13 +258,11 @@
 					"response": []
 				},
 				{
-					"name": "getById",
 					"name": "GetByID",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/tasks/6283fef5bbe2a1f49354961e",
 							"raw": "http://localhost:3000/timesheets/6283f1ed32c067e716f0fa97",
 							"protocol": "http",
 							"host": [
@@ -305,8 +290,6 @@
 							],
 							"port": "3000",
 							"path": [
-								"tasks",
-								"6283fef5bbe2a1f49354961e"
 								"timesheets"
 							]
 						}
@@ -314,14 +297,12 @@
 					"response": []
 				},
 				{
-					"name": "post",
 					"name": "Create",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"taskName\": \"Use of CSS in HTML\",\r\n    \"taskDescription\": \"Use CSS to stylish the page\",\r\n    \"status\": \"Finished\",\r\n    \"employeeID\": \"2\"\r\n}",
 							"raw": "{\r\n    \"name\": \"leonel\",\r\n    \"surName\": \"listro\",\r\n    \"role\": \"DEV\",\r\n    \"startDate\": \"05/15/2020\",\r\n    \"finishDate\": \"05/16/2022\",\r\n    \"regularHours\": \"200\",\r\n    \"overtimeHours\": \"50\",\r\n    \"rate\": \"2500\",\r\n    \"project\": \"project 1\",\r\n    \"task\": \"development\"\r\n}",
 							"options": {
 								"raw": {
@@ -330,7 +311,6 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/tasks",
 							"raw": "http://localhost:3000/timesheets/",
 							"protocol": "http",
 							"host": [
@@ -338,7 +318,6 @@
 							],
 							"port": "3000",
 							"path": [
-								"tasks"
 								"timesheets",
 								""
 							]
@@ -347,13 +326,6 @@
 					"response": []
 				},
 				{
-					"name": "put",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"taskName\": \"Creation of JavaScript\",\r\n    \"taskDescription\": \"Use of JavaScript to give functionality to the page\"\r\n}",
 					"name": "Edit",
 					"request": {
 						"method": "PUT",
@@ -363,7 +335,7 @@
 				}
 			]
 		},
-		{
+        {
 			"name": "Employees",
 			"item": [
 				{
@@ -425,8 +397,6 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/tasks/6283fef5bbe2a1f49354961e",
-							"protocol": "http",
 							"raw": "localhost:3000/Employees/",
 							"host": [
 								"localhost"
@@ -461,8 +431,6 @@
 							],
 							"port": "3000",
 							"path": [
-								"tasks",
-								"6283fef5bbe2a1f49354961e"
 								"Employees",
 								"2"
 							]
@@ -471,13 +439,6 @@
 					"response": []
 				},
 				{
-					"name": "delete",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/tasks/628400d28a714bce42807c97",
-							"protocol": "http",
 					"name": "Delete EmployeeById",
 					"request": {
 						"method": "DELETE",
@@ -498,8 +459,6 @@
 							],
 							"port": "3000",
 							"path": [
-								"tasks",
-								"628400d28a714bce42807c97"
 								"Employees",
 								"2"
 							]
@@ -509,9 +468,247 @@
 				}
 			]
 		},
-		{
-			"name": "Projects",
-			"item": []
-		}
-	]
+        {
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks/6283fef5bbe2a1f49354961e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks",
+								"6283fef5bbe2a1f49354961e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"taskName\": \"Use of CSS in HTML\",\r\n    \"taskDescription\": \"Use CSS to stylish the page\",\r\n    \"status\": \"Finished\",\r\n    \"employeeID\": \"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/tasks",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"taskName\": \"Creation of JavaScript\",\r\n    \"taskDescription\": \"Use of JavaScript to give functionality to the page\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/tasks/6283fef5bbe2a1f49354961e",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks",
+								"6283fef5bbe2a1f49354961e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks/628400d28a714bce42807c97",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks",
+								"628400d28a714bce42807c97"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+        {
+            "name":"Projects",
+            "item": [
+                {
+                    "name": "http://localhost:3000/projects",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"projectName\": \"Project 2345\",\r\n  \"totalHours\": 48,\r\n  \"projectDescription\": \"TEST Description 2\",\r\n  \"startDate\": \"03-12-2022\",\r\n  \"finishDate\": \"04-31-2022\",\r\n  \"rate\": 26,\r\n  \"employeeID\": \"345292124832282b3bf72989\",\r\n  \"role\": \"DEV\",\r\n  \"state\": \"finished\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/projects",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "projects"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "http://localhost:3000/projects",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3000/projects",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "projects"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "http://localhost:3000/projects/628292124832282b3bf72590",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3000/projects/628292124832282b3bf72590",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "projects",
+                                "628292124832282b3bf72590"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "http://localhost:3000/projects/628292124832282b3bf72590",
+                    "request": {
+                        "method": "PUT",
+                        "header": [],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"projectName\": \"Project 2345\",\r\n  \"totalHours\": 48,\r\n  \"projectDescription\": \"TEST Description 2\",\r\n  \"startDate\": \"03-12-2022\",\r\n  \"finishDate\": \"04-31-2022\",\r\n  \"rate\": 30,\r\n  \"employeeID\": \"345292124832282b3bf72989\",\r\n  \"role\": \"QA\",\r\n  \"state\": \"finished\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "http://localhost:3000/projects/628292124832282b3bf72590",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "projects",
+                                "628292124832282b3bf72590"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "http://localhost:3000/projects/628296eb0cf815df08846d7d",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "http://localhost:3000/projects/628296eb0cf815df08846d7d",
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3000",
+                            "path": [
+                                "projects",
+                                "628296eb0cf815df08846d7d"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ]
 }
