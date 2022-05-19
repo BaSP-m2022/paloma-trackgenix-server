@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import express from 'express';
 import bodyParser from 'body-parser';
 import router from './routes';
+
 const mongoDBURL = 'mongodb+srv://BaSP:BaSP2022@cluster0.caoft.mongodb.net/BaSP-database?appName=mongosh+1.3.1';
 mongoose.connect(mongoDBURL, () => {
   console.log('Connected to the database');
