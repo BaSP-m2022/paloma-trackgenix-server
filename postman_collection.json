@@ -124,11 +124,244 @@
 		},
 		{
 			"name": "SuperAdmin",
-			"item": []
+			"item": [
+				{
+					"name": "Get All Super Admins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/superadmins",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"superadmins"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get superadmin by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/superadmins/62825151c2380439abdfa148",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"superadmins",
+								"62825151c2380439abdfa148"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Super Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/superadmins/6283af4dfa9dd62abe8577b6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"superadmins",
+								"6283af4dfa9dd62abe8577b6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Super Admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/superadmins/62825151c2380439abdfa149",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"superadmins",
+								"62825151c2380439abdfa149"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Super Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"juan\",\r\n    \"lastName\":\"miller\",\r\n    \"email\":\"juanmiller@gmail.com\",\r\n    \"password\" :\"qweqwe123123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/superadmins/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"superadmins",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "TimeSheets",
 			"item": []
+		},
+		{
+			"name": "Employees",
+			"item": []
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "get",
+			"item": [
+				{
+					"name": "GetAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks",
+							"raw": "http://localhost:3000/timesheets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks"
+								"timesheets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getById",
+					"name": "GetByID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks/6283fef5bbe2a1f49354961e",
+							"raw": "http://localhost:3000/timesheets/6283f1ed32c067e716f0fa97",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"timesheets",
+								"6283f1ed32c067e716f0fa97"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/timesheets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks",
+								"6283fef5bbe2a1f49354961e"
+								"timesheets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "post",
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"taskName\": \"Use of CSS in HTML\",\r\n    \"taskDescription\": \"Use CSS to stylish the page\",\r\n    \"status\": \"Finished\",\r\n    \"employeeID\": \"2\"\r\n}",
+							"raw": "{\r\n    \"name\": \"leonel\",\r\n    \"surName\": \"listro\",\r\n    \"role\": \"DEV\",\r\n    \"startDate\": \"05/15/2020\",\r\n    \"finishDate\": \"05/16/2022\",\r\n    \"regularHours\": \"200\",\r\n    \"overtimeHours\": \"50\",\r\n    \"rate\": \"2500\",\r\n    \"project\": \"project 1\",\r\n    \"task\": \"development\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/tasks",
+							"raw": "http://localhost:3000/timesheets/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tasks"
+								"timesheets",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"taskName\": \"Creation of JavaScript\",\r\n    \"taskDescription\": \"Use of JavaScript to give functionality to the page\"\r\n}",
+					"name": "Edit",
+					"request": {
+						"method": "PUT",
+						"header": []
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "Employees",
@@ -184,7 +417,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastName\": \"Lorenzi\",\r\n  \"email\": \"asdasd@adfsdas\",\r\n  \"password\": \"asdasd\",\r\n  \"assignedRole\": \"asd\",\r\n  \"assignedTask\": \"asdd\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastname\": \"Lorenzi\",\r\n  \"email\": \"asdasd@adfsdas\",\r\n  \"password\": \"asdasd\",\r\n  \"assignedRole\": \"asd\",\r\n  \"assignedTask\": \"asdd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -192,6 +425,8 @@
 							}
 						},
 						"url": {
+							"raw": "http://localhost:3000/tasks/6283fef5bbe2a1f49354961e",
+							"protocol": "http",
 							"raw": "localhost:3000/Employees/",
 							"host": [
 								"localhost"
@@ -212,7 +447,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastName\": \"Lorenzi\",\r\n  \"email\": \"asdasd@adfsdas\",\r\n  \"password\": \"asdasd\",\r\n  \"assignedRole\": \"asd\",\r\n  \"assignedTask\": \"asdd\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastname\": \"Lorenzi\",\r\n  \"email\": \"asdasd@adfsdas\",\r\n  \"password\": \"asdasd\",\r\n  \"assignedRole\": \"asd\",\r\n  \"assignedTask\": \"asdd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -226,6 +461,8 @@
 							],
 							"port": "3000",
 							"path": [
+								"tasks",
+								"6283fef5bbe2a1f49354961e"
 								"Employees",
 								"2"
 							]
@@ -234,13 +471,20 @@
 					"response": []
 				},
 				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/tasks/628400d28a714bce42807c97",
+							"protocol": "http",
 					"name": "Delete EmployeeById",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastName\": \"Lorenzi\",\r\n  \"email\": \"asdasd@adfsdas\",\r\n  \"password\": \"asdasd\",\r\n  \"assignedRole\": \"asd\",\r\n  \"assignedTask\": \"asdd\"\r\n}",
+							"raw": "{\r\n  \"name\": \"Agustin\",\r\n  \"lastname\": \"Lorenzi\",\r\n  \"email\": \"asdasd@adfsdas\",\r\n  \"password\": \"asdasd\",\r\n  \"assignedRole\": \"asd\",\r\n  \"assignedTask\": \"asdd\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -254,6 +498,8 @@
 							],
 							"port": "3000",
 							"path": [
+								"tasks",
+								"628400d28a714bce42807c97"
 								"Employees",
 								"2"
 							]
@@ -262,10 +508,6 @@
 					"response": []
 				}
 			]
-		},
-		{
-			"name": "Tasks",
-			"item": []
 		},
 		{
 			"name": "Projects",
