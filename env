@@ -1,0 +1,2 @@
+	PORT=4000
+	DATABASE_URL=mongodb+srv://BaSP:BaSP2022@cluster0.6vk6q.mongodb.net/test
