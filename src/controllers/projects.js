@@ -52,7 +52,6 @@ const createProject = async (req, res) => {
       employee: req.body.employee,
     });
     const result = await project.save();
-    console.log(result);
     return res.status(201).json(result);
   } catch (error) {
     return res.status(500).json({ message: 'There was an error saving the project' });
