@@ -9,6 +9,8 @@ beforeAll(async () => {
 
 describe('GET /employees', () => {
   test('The response should return a 200 code status', async () => {
-    await (await request(app).get('/employees')).send();
+    const response = await request(app).get('/employees').send();
+    expect(response.status).toBe(200);
+    console.log(response);
   });
 });
