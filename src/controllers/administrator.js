@@ -3,12 +3,23 @@ import Admin from '../models/Admin';
 // eslint-disable-next-line consistent-return
 const getAllAdmins = async (req, res) => {
   try {
-    const allAdmins = await Admin.find({});
-    return res.status(200).json(allAdmins);
-  } catch (error) {
-    res.status(500).json({
-      message: 'There was an error getting all admins',
-      data: {},
+    const allAdmins = await Admin.find(req.query);
+    if (allAdmins.length > 0) {
+      return res.status(200).json({
+        message: 'Showing the complete list of admins.',
+        data: allAdmins,
+        error: false,
+      });
+    }
+    return res.status(404).json({
+      message: 'Cannot show the list of admins.',
+      data: undefined,
+      error: true,
+    });
+  } catch (err) {
+    return res.status(500).json({
+      message: 'An error occurred.',
+      data: undefined,
       error: true,
     });
   }
