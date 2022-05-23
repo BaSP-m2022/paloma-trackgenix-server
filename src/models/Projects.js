@@ -13,13 +13,14 @@ const projects = new Schema({
     required: true,
     enum: ['finished', 'started'],
   },
-  rate: { type: Number, required: true },
-  employeeID: { type: String, required: true },
-  role: {
-    type: String,
-    required: true,
-    enum: ['QA', 'DEV', 'TL', 'PM'],
-  },
+  employee: [{
+    role: String,
+    rate: Number,
+    employeeId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'employee',
+    },
+  }],
 }, {
   collection: 'Projects',
   versionKey: false,
