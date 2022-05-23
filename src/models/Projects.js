@@ -8,18 +8,19 @@ const projects = new Schema({
   projectDescription: { type: String, required: true },
   startDate: { type: Date, required: true },
   finishDate: { type: Date, required: false },
-  rate: { type: Number, required: true },
-  employeeID: { type: String, required: true },
-  role: {
-    type: String,
-    required: true,
-    enum: ['QA', 'DEV', 'TL', 'PM'],
-  },
   state: {
     type: String,
     required: true,
     enum: ['finished', 'started'],
   },
+  employee: [{
+    role: String,
+    rate: Number,
+    employeeId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'employee',
+    },
+  }],
 }, {
   collection: 'Projects',
   versionKey: false,

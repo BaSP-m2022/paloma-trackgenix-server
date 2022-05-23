@@ -13,13 +13,17 @@ const validateProject = (req, res, next) => {
 
     finishDate: Joi.date().required(),
 
-    rate: Joi.number().required(),
-
-    employeeID: Joi.string().required(),
-
-    role: Joi.string().min(2).valid('QA', 'DEV', 'TL', 'PM').required(),
-
     state: Joi.string().min(3).valid('finished', 'started').required(),
+
+    employee: Joi.array().items(Joi.object({
+
+      rate: Joi.number().required(),
+
+      role: Joi.string().min(2).valid('QA', 'DEV', 'TL', 'PM').required(),
+
+      employeeId: Joi.string().hex().length(24).required(),
+
+    })),
   });
 
   const validation = schema.validate(req.body);
