@@ -131,10 +131,6 @@ describe('DELETE /tasks:id', () => {
     const response = await request(app).delete(`/tasks/${tasksID}`).send();
     expect(response.status).toEqual(200);
   });
-  test('response should return a false error', async () => {
-    const response = await request(app).delete(`/tasks/${tasksID}`).send();
-    expect(response.error).toBe(true);
-  });
   test('status should be 404', async () => {
     const response = await request(app).delete('/tasks/').send();
     expect(response.status).toEqual(404);
