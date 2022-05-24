@@ -62,21 +62,25 @@ const deleteProject = async (req, res) => {
   try {
     if (!req.params.id) {
       return res.status(400).json({
-        msg: 'Missing id parameter',
+        message: 'Missing id parameter',
+        error: true,
       });
     }
     const result = await Projects.findByIdAndDelete(req.params.id);
     if (!result) {
       return res.status(404).json({
-        msg: 'The project has not been found',
+        message: 'The project has not been found',
+        error: true,
       });
     }
     return res.status(200).json({
-      msg: 'Deleted!',
+      message: 'Deleted!',
+      error: false,
     });
   } catch (error) {
     return res.status(500).json({
-      msg: 'An error has ocurred',
+      message: 'An error has ocurred',
+      error: true,
     });
   }
 };
