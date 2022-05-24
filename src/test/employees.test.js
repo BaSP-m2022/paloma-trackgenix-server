@@ -237,6 +237,17 @@ describe('POST /employees', () => {
     });
     expect(response.statusCode).toBe(400);
   });
+  test('It should return an error because "assignedRole" is wrong', async () => {
+    const response = await request(app).post('/employees').send({
+      name: 'Juan',
+      lastname: 'Gimenez',
+      email: 'asdasd@adfsdas.com',
+      password: 'password123',
+      assignedRole: true,
+      assignedTask: 'asdd',
+    });
+    expect(response.statusCode).toBe(400);
+  });
   test('It should return an error because "assignedTask" is wrong', async () => {
     const response = await request(app).post('/employees').send({
       name: 'Juan',
@@ -248,18 +259,61 @@ describe('POST /employees', () => {
     });
     expect(response.statusCode).toBe(400);
   });
-  /*
-  describe('PUT /employees/edit', () => {
-    test('It should return a status code 200', async () => {
-      const response = await request(app).put('/employees').send({
-        name: 'Juan',
-        lastname: 'Gimenez',
-        email: 'asdasd@adfsdas.com',
-        password: 'password123',
-        assignedRole: 'DEV',
-        assignedTask: 'asdd',
-      });
-      expect(response.status).toBe(201);
+  test('It should return an error because "assignedTask" is empty', async () => {
+    const response = await request(app).post('/employees').send({
+      name: 'Juan',
+      lastname: 'Gimenez',
+      email: 'asdasd@adfsdas.com',
+      password: 'password123',
+      assignedRole: 'DEV',
+      assignedTask: '',
     });
-    */
+    expect(response.statusCode).toBe(400);
+  });
+  test('It should return an error because "assignedTask" is not string', async () => {
+    const response = await request(app).post('/employees').send({
+      name: 'Juan',
+      lastname: 'Gimenez',
+      email: 'asdasd@adfsdas.com',
+      password: 'password123',
+      assignedRole: 'DEV',
+      assignedTask: 554645656,
+    });
+    expect(response.statusCode).toBe(400);
+  });
+});
+describe('Put /employees/edit', () => {
+  test('It should return the status code 200', async () => {
+    const response = await request(app).put('/employees/62342225b57ca6d7459809e3').send({
+      name: 'Juan',
+      lastname: 'Gimenez',
+      email: 'asdasd@adfsdas.com',
+      password: 'password123',
+      assignedRole: 'DEV',
+      assignedTask: 'asdd',
+    });
+    expect(response.statusCode).toBe(200);
+  });
+  test('It should return the status code 400 because the name is empty', async () => {
+    const response = await request(app).put('/employees/62342225b57ca6d7459809e3').send({
+      name: '',
+      lastname: 'Gimenez',
+      email: 'asdasd@adfsdas.com',
+      password: 'password123',
+      assignedRole: 'DEV',
+      assignedTask: 'asdd',
+    });
+    expect(response.statusCode).toBe(400);
+  });
+  test('It should return the status code 404 because the ID is wrong', async () => {
+    const response = await request(app).put('/employees/628ae081dbe588f5677e4444444').send({
+      name: 'Juan',
+      lastname: 'Gimenez',
+      email: 'asdasd@adfsdas.com',
+      password: 'password123',
+      assignedRole: 'DEV',
+      assignedTask: 'asdd',
+    });
+    expect(response.statusCode).toBe(404);
+  });
 });
