@@ -3,10 +3,10 @@ import app from '../app';
 import Employees from '../models/Employees';
 import employeesSeed from '../seeds/employees';
 
+let employeesID;
 beforeAll(async () => {
   await Employees.collection.insertMany(employeesSeed);
 });
-
 describe('GET /employees', () => {
   test('The response should return a 200 code status', async () => {
     const response = await request(app).get('/employees').send();
@@ -41,6 +41,7 @@ describe('POST /employees', () => {
       assignedTask: 'asdd',
     });
     expect(response.status).toBe(201);
+    employeesID = '62342225b57ca6d7459809e3';
   });
   test('It should return a status code 400 because the assignedTask is empty', async () => {
     const response = await request(app).post('/employees').send({
@@ -284,7 +285,7 @@ describe('POST /employees', () => {
 });
 describe('Put /employees/edit', () => {
   test('It should return the status code 200', async () => {
-    const response = await request(app).put('/employees/62342225b57ca6d7459809e3').send({
+    const response = await request(app).put(`/employees/${employeesID}`).send({
       name: 'Juan',
       lastname: 'Gimenez',
       email: 'asdasd@adfsdas.com',
@@ -305,15 +306,67 @@ describe('Put /employees/edit', () => {
     });
     expect(response.statusCode).toBe(400);
   });
-  test('It should return the status code 404 because the ID is wrong', async () => {
-    const response = await request(app).put('/employees/628ae081dbe588f5677e4444444').send({
-      name: 'Juan',
-      lastname: 'Gimenez',
-      email: 'asdasd@adfsdas.com',
-      password: 'password123',
-      assignedRole: 'DEV',
-      assignedTask: 'asdd',
-    });
-    expect(response.statusCode).toBe(404);
+
+//   test('It should return the status code 404 because the ID is wrong', async () => {
+//     const response = await request(app).put('/employees/3').send({
+//       name: 'Juan',
+//       lastname: 'Gimenez',
+//       email: 'asdasd@adfsdas.com',
+//       password: 'password123',
+//       assignedRole: 'DEV',
+//       assignedTask: 'asdd',
+//     });
+//     expect(response.statusCode).toBe(404);
+//   });
+});
+describe('GetById /employees', () => {
+  test('It should return an employees with the mentioned ID', async () => {
+    // eslint-disable-next-line no-undef
+    const response = await request(app).get(`/employees/${employeesID}`).send();
+    expect(response.status).toBe(200);
+  });
+
+  test('It should return a error status code message because the ID does not exist', async () => {
+    const response = await request(app).get('/employees/5jhjhbjbu').send();
+    expect(response.status).not.toBe(200);
+  });
+  //
+  test('It should return the error message', async () => {
+    const response = await request(app).get('/employees/id').send();
+    expect(response.status).toBe(400);
+  });
+
+  test('The error should be true', async () => {
+    const response = await request(app).get('/employees/6').send();
+    expect(response.body.error).toBeTruthy();
+  });
+  //
+  test('The error should be false', async () => {
+    // eslint-disable-next-line no-undef
+    const response = await request(app).get(`/employees/${employeesID}`).send();
+    expect(response.body.error).toBeFalsy();
+  });
+});
+describe('Delete /employees', () => {
+  test('It should return a status code 200, the message should be "Deleted employees!" and the error false', async () => {
+    const response = await request(app).delete(`/employees/${employeesID}`).send();
+    expect(response.status).toBe(200);
+    expect(response.body.msg).toBe('Employee succesfully Deleted!');
+    expect(response.body.error).toBeFalsy();
+  });
+
+  test('The message should be "The employee was not found!" because it was deleted previously', async () => {
+    const response = await request(app).delete(`/employees/${employeesID}`).send();
+    expect(response.body.msg).toBe('The Employee has not been found');
+  });
+
+  test('It should return a status code 404 because the employee was not found', async () => {
+    const response = await request(app).delete(`/employees/${employeesID}`).send();
+    expect(response.status).toBe(404);
+  });
+
+  test('It should return true error', async () => {
+    const response = await request(app).delete(`/employees/${employeesID}`).send();
+    expect(response.body.error).toBeTruthy();
   });
 });
