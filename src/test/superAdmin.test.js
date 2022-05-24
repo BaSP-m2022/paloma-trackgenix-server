@@ -21,7 +21,7 @@ describe('GET /superadmins', () => {
     expect(response.body.data.length).toBeGreaterThan(0);
   });
 
-  test('Response should return a false error', async () => {
+  test('Response should return an error false', async () => {
     const response = await request(app).get('/superadmins').send();
     expect(response.body.error).toBeFalsy();
   });
@@ -76,7 +76,7 @@ describe('POST /superadmins', () => {
     expect(response.status).toBe(400);
   });
 
-  test('Response should return an error message - Missing all data', async () => {
+  test('Response should return a message - Missing all data', async () => {
     const response = await request(app).post('/superadmins').send({});
     expect(response.body.message).toEqual('There was an error during validation of the request');
   });
@@ -93,7 +93,7 @@ describe('GET By ID /superadmins', () => {
     expect(response.status).toBe(200);
   });
 
-  test('Response should return an error', async () => {
+  test('Response should return an error true', async () => {
     const response = await request(app).get('/superadmins/62825151c2380439abdfa145').send();
     expect(response.body.error).toBeTruthy();
   });
@@ -110,7 +110,7 @@ describe('PUT /superadmins', () => {
     expect(response.status).toBe(200);
   });
 
-  test('Response should return a 200 status', async () => {
+  test('Response should return a error false', async () => {
     const response = await request(app).put(`/superadmins/${id}`).send({
       name: 'Juan',
       lastName: 'Miller',
@@ -150,7 +150,7 @@ describe('PUT /superadmins', () => {
 });
 
 describe('DELETE /superadmins', () => {
-  test('Response should return a 200 status, error = false and message \'Deleted!\'', async () => {
+  test('Response should return a 200 status, error false and message \'Deleted!\'', async () => {
     const response = await request(app).delete(`/superadmins/${id}`).send();
     expect(response.status).toBe(200);
     expect(response.body.error).toBeFalsy();
@@ -162,7 +162,7 @@ describe('DELETE /superadmins', () => {
     expect(response.body.msg).toBe('The super admin has not been found');
   });
 
-  test('Response should return an error', async () => {
+  test('Response should return an error true', async () => {
     const response = await request(app).delete('/superadmins/628262eb0736fab270eba555').send();
     expect(response.body.error).toBeTruthy();
   });
@@ -177,7 +177,7 @@ describe('DELETE /superadmins', () => {
     expect(response.status).toBe(500);
   });
 
-  test('Response should return an error', async () => {
+  test('Response should return an error true', async () => {
     const response = await request(app).delete('/superadmins/55').send();
     expect(response.body.error).toBeTruthy();
   });
