@@ -72,7 +72,7 @@ const editSuperAdmin = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: 'An error occurred',
-      error: error.details[0].message,
+      error: true,
     });
   }
 };

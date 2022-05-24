@@ -6,7 +6,9 @@ dotenv.config();
 
 const port = process.env.PORT || 3000;
 
-const mongoDBURL = process.env.DATABASE_URL;
+// const mongoDBURL = process.env.DATABASE_URL;
+
+const mongoDBURL = 'mongodb+srv://BaSP:BaSP2022@cluster0.caoft.mongodb.net/BaSP-database?appName=mongosh+1.3.1';
 
 mongoose.connect(mongoDBURL, () => {
   console.log('Connected to the database');
