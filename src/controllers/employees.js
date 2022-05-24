@@ -6,11 +6,16 @@ import Employees from '../models/Employees';
 const getAllEmployees = async (req, res) => {
   try {
     const allEmployees = await Employees.find({});
-    return res.status(200).json(allEmployees);
+    return res.status(200).json({
+      message: 'Showing the complete list of employees.',
+      data: allEmployees,
+      error: false,
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
       message: 'There was an error',
+      error: true,
     });
   }
 };
@@ -19,18 +24,21 @@ const getEmployeesById = async (req, res) => {
     if (!req.params) {
       return res.status(400).json({
         message: 'Missing an ID parameter',
+        error: true,
       });
     }
     const employee = await Employees.findById(req.params.id);
     if (!employee) {
       return res.status(404).json({
         message: 'The employee was not found',
+        error: true,
       });
     }
     return res.status(200).json(employee);
   } catch (error) {
     return res.status(500).json({
       msg: 'Error',
+      error: true,
     });
   }
 };
@@ -50,7 +58,7 @@ const createEmployees = async (req, res) => {
     return res.status(201).json(result);
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ message: 'There was an error saving the employee' });
+    return res.status(500).json({ message: 'There was an error saving the employee', error: true });
   }
 };
 
