@@ -23,18 +23,18 @@ const timeSheetSchema = new Schema(
       type: Number,
       required: true,
     },
-    project: [{
+    project: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Projects',
-    }],
-    task: [{
+    },
+    task: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Tasks',
-    }],
-    employee: [{
+    },
+    employee: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'employee',
-    }],
+    },
   },
   {
     collection: 'Timesheet',
