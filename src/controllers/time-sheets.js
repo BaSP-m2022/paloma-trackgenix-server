@@ -2,7 +2,7 @@ import Timesheets from '../models/Timesheets';
 
 const getAllTimeSheets = async (req, res) => {
   try {
-    const allTimeSheets = await Timesheets.find({});
+    const allTimeSheets = await Timesheets.find({}).populate('employee').populate('project').populate('task');
     return res.status(200).json(allTimeSheets);
   } catch (error) {
     console.log(error);
@@ -19,7 +19,7 @@ const getTimeSheetsById = async (req, res) => {
         message: 'Missing id parameter',
       });
     }
-    const timeSheet = await Timesheets.findById(req.params.id);
+    const timeSheet = await Timesheets.findById(req.params.id).populate('employee').populate('project').populate('task');
     if (!timeSheet) {
       return res.status(404).json({
         message: 'The timesheet has not been found',
@@ -38,9 +38,7 @@ const getTimeSheetsById = async (req, res) => {
 const createTimesheet = async (req, res) => {
   try {
     const newTimeSheet = new Timesheets({
-      name: req.body.name,
-      surName: req.body.surName,
-      role: req.body.role,
+      employee: req.body.employee,
       startDate: req.body.startDate,
       finishDate: req.body.finishDate,
       regularHours: req.body.regularHours,
