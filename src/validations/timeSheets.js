@@ -2,16 +2,14 @@ import Joi from 'joi';
 
 const validateTimesheet = (req, res, next) => {
   const timesheetValidation = Joi.object({
-    name: Joi.string().min(3).required(),
-    surName: Joi.string().min(3).required(),
-    role: Joi.string().valid('QA', 'PM', 'DEV').min(2).required(),
     startDate: Joi.date().required(),
     finishDate: Joi.date().required(),
     regularHours: Joi.number().min(1).required(),
     overtimeHours: Joi.number().required(),
-    rate: Joi.string().min(2).required(),
-    project: Joi.string().required(),
-    task: Joi.string().required(),
+    rate: Joi.number().required(),
+    employee: Joi.string().hex().length(24).required(),
+    project: Joi.string().hex().length(24).required(),
+    task: Joi.string().hex().length(24).required(),
   });
     // Validate Schema with the body of the request
   const validation = timesheetValidation.validate(req.body);
@@ -28,16 +26,14 @@ const validateTimesheet = (req, res, next) => {
 
 const validatePutTimesheet = (req, res, next) => {
   const timesheetValidation = Joi.object({
-    name: Joi.string().min(3),
-    surName: Joi.string().min(3),
-    role: Joi.string().min(2),
     startDate: Joi.date(),
     finishDate: Joi.date(),
     regularHours: Joi.number().min(1),
     overtimeHours: Joi.number(),
-    rate: Joi.string().min(2),
-    project: Joi.string(),
-    task: Joi.string(),
+    rate: Joi.number(),
+    employee: Joi.string().hex().length(24),
+    project: Joi.string().hex().length(24),
+    task: Joi.string().hex().length(24),
   });
   // Validate Schema with the body of the request
   const validation = timesheetValidation.validate(req.body);
