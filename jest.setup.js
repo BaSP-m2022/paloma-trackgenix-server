@@ -23,3 +23,4 @@ afterAll(async () => {
   await mongoServer.stop();
   await mongo.stop();
 });
+jest.setTimeout(300000);
