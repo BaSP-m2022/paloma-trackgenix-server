@@ -52,8 +52,8 @@ describe('GET /ProjectsById', () => {
 });
 
 describe('put /Projects', () => {
-  test('response should return a 200 status', async () => {
-    const response = await request(app).get('/projects/628bc4a3a60db4d71c872757').send({
+  test('Response should return a 200 status', async () => {
+    const response = await request(app).put('/projects/628bc4a3a60db4d71c872757').send({
       projectName: 'Project 2345',
       totalHours: '48',
       projectDescription: 'TEST Description 2',
@@ -67,5 +67,73 @@ describe('put /Projects', () => {
       }],
     });
     expect(response.status).toBe(200);
+  });
+
+  test('Response should return a 200 status', async () => {
+    const response = await request(app).put('/projects/628bc4a3a60db4d71c872757').send({
+      projectName: 'Project 2345',
+      totalHours: '48',
+      projectDescription: 'TEST Description 2',
+      startDate: '2022-03-12T03:00:00.000+00:00',
+      finishDate: '2022-05-01T03:00:00.000+00:00',
+      state: 'finished',
+      employee: [{
+        role: 'QA',
+        rate: '27',
+        employeeId: '628a6a4d9397655c03855a13',
+      }],
+    });
+    expect(response.body.error).toBeFalsy();
+  });
+
+  test('Response should return error truth', async () => {
+    const response = await request(app).put('/projects/628bc4a3a60db4d71c872757').send({
+      projectName: 'Project 2345',
+      totalHours: '48',
+      projectDescription: 'TEST Description 2',
+      startDate: '2022-03-12T03:00:00.000+00:00',
+      finishDate: '2022-05-01T03:00:00.000+00:00',
+      state: 'finished',
+      employee: [{
+        role: 'QA',
+        rate: '27',
+        employeeId: '628a6a4d9397655c03855a13',
+      }],
+    });
+    expect(response.body.error).toBeTruthy();
+  });
+
+  test('Response should return a 404 status', async () => {
+    const response = await request(app).put('/projects/628bc4a3a60db4d71c872788').send({
+      projectName: 'Project 2345',
+      totalHours: '48',
+      projectDescription: 'TEST Description 2',
+      startDate: '2022-03-12T03:00:00.000+00:00',
+      finishDate: '2022-05-01T03:00:00.000+00:00',
+      state: 'finished',
+      employee: [{
+        role: 'QA',
+        rate: '27',
+        employeeId: '628a6a4d9397655c03855a13',
+      }],
+    });
+    expect(response.status).toBe(404);
+  });
+
+  test('Response should return status error(400)', async () => {
+    const response = await request(app).put('/projects/_id').send({
+      projectName: 'Project 2345',
+      totalHours: '48',
+      projectDescription: 'TEST Description 2',
+      startDate: '2022-03-12T03:00:00.000+00:00',
+      finishDate: '2022-05-01T03:00:00.000+00:00',
+      state: 'finished',
+      employee: [{
+        role: 'QA',
+        rate: '27',
+        employeeId: '628a6a4d9397655c03855a13',
+      }],
+    });
+    expect(response.status).toBe(400);
   });
 });
