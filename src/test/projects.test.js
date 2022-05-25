@@ -3,6 +3,8 @@ import app from '../app';
 import project from '../models/Projects';
 import projectSeeds from '../seeds/projects';
 
+jest.setTimeout(300000);
+
 beforeAll(async () => {
   await project.collection.insertMany(projectSeeds);
 });
@@ -92,7 +94,6 @@ describe('put /Projects', () => {
       totalHours: '48',
       projectDescription: 'TEST Description 2',
       startDate: '2022-03-12T03:00:00.000+00:00',
-      finishDate: '2022-05-01T03:00:00.000+00:00',
       state: 'finished',
       employee: [{
         role: 'QA',
@@ -118,22 +119,5 @@ describe('put /Projects', () => {
       }],
     });
     expect(response.status).toBe(404);
-  });
-
-  test('Response should return status error(400)', async () => {
-    const response = await request(app).put('/projects/_id').send({
-      projectName: 'Project 2345',
-      totalHours: '48',
-      projectDescription: 'TEST Description 2',
-      startDate: '2022-03-12T03:00:00.000+00:00',
-      finishDate: '2022-05-01T03:00:00.000+00:00',
-      state: 'finished',
-      employee: [{
-        role: 'QA',
-        rate: '27',
-        employeeId: '628a6a4d9397655c03855a13',
-      }],
-    });
-    expect(response.status).toBe(400);
   });
 });
