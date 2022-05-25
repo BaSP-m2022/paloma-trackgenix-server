@@ -306,18 +306,6 @@ describe('Put /employees/edit', () => {
     });
     expect(response.statusCode).toBe(400);
   });
-
-//   test('It should return the status code 404 because the ID is wrong', async () => {
-//     const response = await request(app).put('/employees/3').send({
-//       name: 'Juan',
-//       lastname: 'Gimenez',
-//       email: 'asdasd@adfsdas.com',
-//       password: 'password123',
-//       assignedRole: 'DEV',
-//       assignedTask: 'asdd',
-//     });
-//     expect(response.statusCode).toBe(404);
-//   });
 });
 describe('GetById /employees', () => {
   test('It should return an employees with the mentioned ID', async () => {
@@ -332,8 +320,8 @@ describe('GetById /employees', () => {
   });
   //
   test('It should return the error message', async () => {
-    const response = await request(app).get('/employees/id').send();
-    expect(response.status).toBe(400);
+    const response = await request(app).get('/employees//').send();
+    expect(response.status).toBe(404);
   });
 
   test('The error should be true', async () => {
