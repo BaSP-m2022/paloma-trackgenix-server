@@ -2,7 +2,11 @@ import Projects from '../models/Projects';
 
 const getAllProjects = async (req, res) => {
   try {
-    const allProjects = await Projects.find({});
+    const allProjects = await Projects.find({}).populate('employee.employeeId', {
+      name: 1,
+      lastname: 1,
+      email: 1,
+    }).exec();
     return res.status(200).json(allProjects);
   } catch (error) {
     return res.status(500).json({
@@ -18,7 +22,11 @@ const getProjectsById = async (req, res) => {
         message: 'Missing an ID parameter',
       });
     }
-    const project = await Projects.findById(req.params.id);
+    const project = await Projects.findById(req.params.id).populate('employee.employeeId', {
+      name: 1,
+      lastname: 1,
+      email: 1,
+    }).exec();
     if (!project) {
       return res.status(404).json({
         message: 'The project was not found',
@@ -40,10 +48,8 @@ const createProject = async (req, res) => {
       projectDescription: req.body.projectDescription,
       startDate: req.body.startDate,
       finishDate: req.body.finishDate,
-      rate: req.body.rate,
-      employeeID: req.body.employeeID,
-      role: req.body.role,
       state: req.body.state,
+      employee: req.body.employee,
     });
     const result = await project.save();
     return res.status(201).json(result);
